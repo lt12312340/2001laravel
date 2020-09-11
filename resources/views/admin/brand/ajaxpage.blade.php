@@ -1,6 +1,6 @@
 @foreach($brand as $v)
             <tr brand_id = {{$v->brand_id}}>
-                <td><input type="checkbox" name="brandcheck[]" lay-skin="primary"  ></td>
+                <td><input type="checkbox" name="brandcheck[]" value="{{$v->brand_id}}" lay-skin="primary"  ></td>
                 <td>{{$v->brand_id}}</td>
                 <td field="brand_name">
                   <span class="brand_name">{{$v->brand_name}}</span>
