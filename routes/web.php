@@ -45,3 +45,13 @@ Route::any('/category/store','Admin\CategoryController@store');//分类执行添
 Route::any('/category/destroy/{cate_id}','Admin\CategoryController@destroy');//删除
 Route::any('/category/check_cateshows','Admin\CategoryController@check_cateshows');//对错号
 
+//管理员
+Route::get('/admin/create','Admin\AdminController@create')->name('admin.create');//表单展示
+Route::post('/admin/store','Admin\AdminController@store');//执行添加
+Route::post('/admin/upload','Admin\AdminController@upload');//文件上传拖拽
+Route::any('/admin','Admin\AdminController@index')->name('admin');//列表展示
+Route::get('/admin/edit/{admin_id}','Admin\AdminController@edit');//修改页面
+Route::post('/admin/updata/{admin_id}','Admin\AdminController@updata');//执行修改
+Route::get('/admin/destroy/{admin_id?}','Admin\AdminController@destroy');//删除
+Route::get('/login','Admin\AdminController@login');//登录
+Route::get('/logindo','Admin\AdminController@logindo');//执行登录

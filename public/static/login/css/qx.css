@@ -1,0 +1,24 @@
+#leftSelect{
+			float: left;
+			height: 300px;
+			overflow-x: auto;
+			width: 45%;
+			text-align: center;
+			margin-left: 38px!important;
+		}
+		#rightSelect{
+			float: left;
+			height: 300px;
+			overflow-x: auto;
+			width: 45%;
+			text-align: center;
+			margin-left: 38px!important;
+		}
+		h2{
+			text-align: center;
+		}
+		#main_div{
+			width: 100%;
+			height: 600px;
+			overflow-x: auto;
+		}
