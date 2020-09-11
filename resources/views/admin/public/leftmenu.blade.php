@@ -17,6 +17,8 @@
             <dd @if($name=='brand') class="layui-this" @endif><a href="{{url('brand')}}">品牌展示</a></dd>
           </dl>
         </li>
+
+        <li class="layui-nav-item"><a href="">日志管理</a></li>
         <li @if(strpos($name,'category')!==false) class="layui-nav-item layui-nav-itemed" @else class="layui-nav-item" @endif>
           <a href="javascript:;">分类管理</a>
           <dl class="layui-nav-child">
