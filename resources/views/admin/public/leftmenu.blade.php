@@ -6,8 +6,8 @@
         <li @if(strpos($name,'goods')!==false) class="layui-nav-item layui-nav-itemed" @else class="layui-nav-item" @endif>
           <a class="" href="javascript:;">商品管理</a>
           <dl class="layui-nav-child">
-            <dd @if($name=='goods.create') class="layui-this" @endif><a href="javascript:;">商品添加</a></dd>
-            <dd @if($name=='goods') class="layui-this" @endif><a href="javascript:;">商品展示</a></dd>
+            <dd @if($name=='goods.create') class="layui-this" @endif><a href="/goods/create">商品添加</a></dd>
+            <dd @if($name=='goods') class="layui-this" @endif><a href="/goods/index">商品展示</a></dd>
           </dl>
         </li>
         <li @if(strpos($name,'brand')!==false) class="layui-nav-item layui-nav-itemed" @else class="layui-nav-item" @endif>
