@@ -17,6 +17,23 @@
             <dd @if($name=='brand') class="layui-this" @endif><a href="{{url('brand')}}">品牌展示</a></dd>
           </dl>
         </li>
+
+        <li class="layui-nav-item"><a href="">日志管理</a></li>
+        <li @if(strpos($name,'category')!==false) class="layui-nav-item layui-nav-itemed" @else class="layui-nav-item" @endif>
+          <a href="javascript:;">分类管理</a>
+          <dl class="layui-nav-child">
+            <dd @if($name=='category.create') class="layui-this" @endif><a href="{{url('category/create')}}">分类添加</a></dd>
+            <dd @if($name=='category') class="layui-this" @endif><a href="{{url('category')}}">分类展示</a></dd>
+          </dl>
+        </li>
+        <!-- 管理员 -->
+        <li @if(strpos($name,'admin')!==false) class="layui-nav-item layui-nav-itemed" @else class="layui-nav-item" @endif>
+          <a href="javascript:;">管理员管理</a>
+          <dl class="layui-nav-child">
+            <dd @if($name=='admin.create') class="layui-this" @endif><a href="{{url('admin/create')}}">管理员添加</a></dd>
+            <dd @if($name=='admin') class="layui-this" @endif><a href="{{url('admin')}}">管理员列表</a></dd>
+          </dl>
+        </li>
         <li class="layui-nav-item"><a href="">云市场</a></li>
         <li class="layui-nav-item"><a href="">发布商品</a></li>
       </ul>
