@@ -38,6 +38,20 @@ Route::post('/brand/update/{brand_id}','Admin\BrandController@update');
 Route::get('/brand/destroy/{brand_id?}','Admin\BrandController@destroy');
 Route::post('/brand/check_name','Admin\BrandController@check_name');
 
+
+//商品
+Route::prefix('goods')->group(function(){
+    Route::any('index','Admin\GoodsController@index')->name("goods");
+    Route::any('create','Admin\GoodsController@create')->name("goods.create");
+    Route::post('upload','Admin\GoodsController@upload');
+    Route::any('store','Admin\GoodsController@store');
+    Route::any('checkge','Admin\GoodsController@checkge');
+    Route::any('ajaxji','Admin\GoodsController@ajaxji');
+    Route::get('destroy/{brand_id?}','Admin\GoodsController@destroy');
+    Route::get('edit/{goods_id?}','Admin\GoodsController@edit');
+    Route::any('update/{goods_id}','Admin\GoodsController@update');
+});
+
 // 项目后台分类管理
 Route::any('/category','Admin\CategoryController@index')->name('category');//分类列表
 Route::any('/category/create','Admin\CategoryController@create')->name('category.create');//分类添加页面
@@ -55,3 +69,4 @@ Route::post('/admin/updata/{admin_id}','Admin\AdminController@updata');//执行�
 Route::get('/admin/destroy/{admin_id?}','Admin\AdminController@destroy');//删除
 Route::get('/login','Admin\AdminController@login');//登录
 Route::get('/logindo','Admin\AdminController@logindo');//执行登录
+
