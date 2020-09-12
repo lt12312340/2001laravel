@@ -56,8 +56,11 @@
             </thead>
             <tbody>
             @foreach($cate as $v)
-            <tr cate_id="{{$v->cate_id}}">
-                <td>{{$v->cate_id}}</td>
+            <tr style="display:none;" pid="{{$v->pid}}" cate_id="{{$v->cate_id}}">
+                <td>
+                  <a href="javascript:;" class='showHide' style="color:red;">+</a>
+                  {{$v->cate_id}}
+                </td>
                 <td>
                 {{str_repeat('|——',$v->level)}}{{$v->cate_name}}
                   <!-- <span class="brand_name">{{$v->brand_name}}</span>
@@ -118,6 +121,7 @@ function DeleteGetId(cate_id,obj){
     },'json')
 }
 
+// 对错号即点即改
 $('.changeValue').click(function(){
   // 获取点击对象
   var _this=$(this);
@@ -152,6 +156,32 @@ $('.changeValue').click(function(){
       }
     }
   })
+})
+
+// 获取顶级分类
+$("tr[pid='0']").show();
+
+// 给+绑定点击事件
+$('.showHide').click(function(){
+  // 获取点击+的这个对象
+  var _this=$(this);
+  // console.log(_this);
+  // 获取纯文本
+  var sign=_this.text();
+  // console.log(sign);
+  var cate_id=_this.parents("tr").attr('cate_id');
+  // console.log('cate_id');
+  if(sign=='+'){
+    var child=$("tr[pid='"+cate_id+"']");
+    // console.log(child.length);
+    if(child.length>0){
+      child.show();
+      _this.text("-");
+    }
+  }else{
+    $("tr[pid='"+cate_id+"']").hide();
+    _this.text("+");
+  }
 })
 </script>
   @endsection
