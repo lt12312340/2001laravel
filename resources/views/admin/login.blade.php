@@ -24,14 +24,19 @@
             <input name="admin_name"id='username'  placeholder="用户名"  type="text" lay-verify="required" class="layui-input" >
             <font color=red>{{session('msg')}}</font>
             <hr class="hr15">
-            <input name="admin_pwd" id="password" lay-verify="required" placeholder="密码"  type="password" class="layui-input">
-            <hr class="hr15">
+			<input name="admin_pwd" id="password" lay-verify="required" placeholder="密码"  type="password" class="layui-input">
+			<font color=red>{{session('mng')}}</font>
+			<hr class="hr15">
+			<input type="text" id="input1" name="captcha" placeholder="验证码" />
+			<p class=""><img  id="img" src="{{route('getCaptcha')}}" alt=""><a href="javascript:;"  id="code" class="aaa"><u>换一张</u></a>
+			<p><font color=red>{{session('mag')}}{{session('mbg')}}</font></p>
             <input class="loginin" value="登录" lay-submit lay-filter="login" style="width:100%;" type="submit" >
             <hr class="hr20" >
 
         </form>
     </div>
-    <script src="static/js/path.js"></script>
+	<script src="static/js/path.js"></script>
+	<script src="/static/layui/jquery.js"></script>
 <script type="text/javascript">
 	/*function login(){
 		var name=$("#username").val();
@@ -107,10 +112,25 @@
 					},
 			} );
 	  });
+	  
 	}); 
+
 	
 </script>
-    
+<script>
+	var img=document.getElementById('img');
+	img.addEventListener('click',function(){
+		this.setAttribute('scr','/getCaptcha?s='+Math.random());
+	},false);
+
+	
+</script>
+<script>
+	$(document).on('click','.aaa',function(){
+		//alert(123);
+		window.location.reload();
+	  })
+</script>
     <!-- 底部结束 -->
 </body>
 </html>
