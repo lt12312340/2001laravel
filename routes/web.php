@@ -28,6 +28,8 @@ Route::get('/', function () {
 //     Route::any('product/{id}','News\NewsController@product');
 // });
 
+
+Route::middleware('checkuselogin')->group(function(){
 // 品牌管理
 Route::any('/brand','Admin\BrandController@index')->name('brand');
 Route::get('/brand/create','Admin\BrandController@create')->name('brand.create');
@@ -67,6 +69,13 @@ Route::any('/admin','Admin\AdminController@index')->name('admin');//列表展示
 Route::get('/admin/edit/{admin_id}','Admin\AdminController@edit');//修改页面
 Route::post('/admin/updata/{admin_id}','Admin\AdminController@updata');//执行修改
 Route::get('/admin/destroy/{admin_id?}','Admin\AdminController@destroy');//删除
+Route::get('/loginout','Admin\AdminController@loginout');//退出登录
+});
+
+
+//登录
 Route::get('/login','Admin\AdminController@login');//登录
 Route::get('/logindo','Admin\AdminController@logindo');//执行登录
+Route::get('/getCaptcha','Admin\AdminController@getCaptcha')->name('getCaptcha');//验证码
+
 
