@@ -45,7 +45,7 @@
           </dl>
         </li>
         <!-- 权限管理 -->
-        <li @if(strpos($name,'admin')!==false) class="layui-nav-item layui-nav-itemed" @else class="layui-nav-item" @endif>
+        <li @if(strpos($name,'menu')!==false) class="layui-nav-item layui-nav-itemed" @else class="layui-nav-item" @endif>
           <a href="javascript:;">权限管理</a>
           <dl class="layui-nav-child">
             <dd @if($name=='menu.create') class="layui-this" @endif><a href="{{url('menu/create')}}">权限添加</a></dd>
