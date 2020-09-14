@@ -79,3 +79,12 @@ Route::get('/logindo','Admin\AdminController@logindo');//执行登录
 Route::get('/getCaptcha','Admin\AdminController@getCaptcha')->name('getCaptcha');//验证码
 
 
+
+//权限管理
+Route::get('/menu/create','Admin\MenuController@create')->name('menu.create');
+Route::post('/menu/store','Admin\MenuController@store');
+Route::any('/menu','Admin\MenuController@index')->name('menu');
+Route::post('/menu/check_name','Admin\MenuController@check_name');
+Route::get('/menu/destroy/{id?}','Admin\MenuController@destroy');
+Route::get('/menu/edit/{id}','Admin\MenuController@edit');
+Route::post('/menu/update/{id}','Admin\MenuController@update');
