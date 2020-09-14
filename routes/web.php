@@ -70,6 +70,18 @@ Route::get('/admin/edit/{admin_id}','Admin\AdminController@edit');//修改页面
 Route::post('/admin/updata/{admin_id}','Admin\AdminController@updata');//执行修改
 Route::get('/admin/destroy/{admin_id?}','Admin\AdminController@destroy');//删除
 Route::get('/loginout','Admin\AdminController@loginout');//退出登录
+
+//角色
+Route::prefix('/role')->group(function(){
+    Route::get('/create','Admin\RoleController@create')->name('role.create');//表单展示
+    Route::post('store','Admin\RoleController@store');//执行添加
+    Route::any('/','Admin\RoleController@index')->name('role');//列表展示
+    Route::get('/destroy/{role_id?}','Admin\RoleController@destroy');//单删  批删
+    Route::post('/check_name','Admin\RoleController@check_name');//即点即改
+    Route::get('/edit/{role_id}','Admin\RoleController@edit');//修改页面
+    Route::post('/update/{role_id}','Admin\RoleController@update');//执行修改
+});
+
 });
 
 

@@ -34,6 +34,15 @@
             <dd @if($name=='admin') class="layui-this" @endif><a href="{{url('admin')}}">管理员列表</a></dd>
           </dl>
         </li>
+
+        <!-- 角色 -->
+        <li @if(strpos($name,'role')!==false) class="layui-nav-item layui-nav-itemed" @else class="layui-nav-item" @endif>
+          <a href="javascript:;">角色管理</a>
+          <dl class="layui-nav-child">
+            <dd @if($name=='role.create') class="layui-this" @endif><a href="{{url('role/create')}}">角色添加</a></dd>
+            <dd @if($name=='role') class="layui-this" @endif><a href="{{url('role')}}">角色列表</a></dd>
+          </dl>
+        </li>
         <li class="layui-nav-item"><a href="">云市场</a></li>
         <li class="layui-nav-item"><a href="">发布商品</a></li>
       </ul>
