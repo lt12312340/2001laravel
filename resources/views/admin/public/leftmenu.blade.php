@@ -35,12 +35,22 @@
           </dl>
         </li>
 
+
         <!-- 角色 -->
         <li @if(strpos($name,'role')!==false) class="layui-nav-item layui-nav-itemed" @else class="layui-nav-item" @endif>
           <a href="javascript:;">角色管理</a>
           <dl class="layui-nav-child">
             <dd @if($name=='role.create') class="layui-this" @endif><a href="{{url('role/create')}}">角色添加</a></dd>
             <dd @if($name=='role') class="layui-this" @endif><a href="{{url('role')}}">角色列表</a></dd>
+          </dl>
+        </li>
+        <!-- 权限管理 -->
+        <li @if(strpos($name,'admin')!==false) class="layui-nav-item layui-nav-itemed" @else class="layui-nav-item" @endif>
+          <a href="javascript:;">权限管理</a>
+          <dl class="layui-nav-child">
+            <dd @if($name=='menu.create') class="layui-this" @endif><a href="{{url('menu/create')}}">权限添加</a></dd>
+            <dd @if($name=='menu') class="layui-this" @endif><a href="{{url('menu')}}">权限列表</a></dd>
+
           </dl>
         </li>
         <li class="layui-nav-item"><a href="">云市场</a></li>
