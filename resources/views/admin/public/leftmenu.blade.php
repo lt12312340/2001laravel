@@ -44,6 +44,7 @@
             <dd @if($name=='role') class="layui-this" @endif><a href="{{url('role')}}">角色列表</a></dd>
           </dl>
         </li>
+<<<<<<< HEAD
         <!-- 权限管理 -->
         <li @if(strpos($name,'menu')!==false) class="layui-nav-item layui-nav-itemed" @else class="layui-nav-item" @endif>
           <a href="javascript:;">权限管理</a>
@@ -53,6 +54,10 @@
 
           </dl>
         </li>
+=======
+
+        
+>>>>>>> zhoutao
         <li class="layui-nav-item"><a href="">云市场</a></li>
         <li class="layui-nav-item"><a href="">发布商品</a></li>
       </ul>
