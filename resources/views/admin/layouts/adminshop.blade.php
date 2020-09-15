@@ -28,6 +28,8 @@
     <ul class="layui-nav layui-layout-right">
       <li class="layui-nav-item">
         <a href="javascript:;">
+        <img src="{{session('admin.my_img')}}" class="layui-nav-img">
+          {{session('admin.admin_account')}}
         </a>
         <dl class="layui-nav-child">
           <dd><a href="">基本资料</a></dd>
