@@ -25,7 +25,10 @@ class MenuController extends Controller
         if($model){
             $where[]= ['model','like',"%$model%"];
         }
-         $menu = Menu::where($where)->orderBy('id','desc')->paginate(3);
+         //$menu = Menu::where($where)->orderBy('id','desc')->paginate(3);
+         $menu = Menu::get();
+        //dd($Menu);
+        $menu = menuTree($menu);
         if(request()->ajax()){
             return view('admin/menu/ajaxpage',['menu'=>$menu,'query'=>request()->all()]);
         }
@@ -39,7 +42,11 @@ class MenuController extends Controller
      */
     public function create()
     {
-        return view("admin.menu.create");
+        $Menu = Menu::get();
+        //dd($Menu);
+        $Menu = menuTree($Menu);
+        //dump($Menu);
+        return view("admin.menu.create",['menu'=>$Menu]);
     }
 
     /**

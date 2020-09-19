@@ -53,7 +53,14 @@
             </div>
         </div>
 
-       
+        <div class="layui-form-item">
+            <label class="layui-form-label">角色:</label>
+            <div class="layui-input-block">
+              @foreach($role as $v)
+              <input @if(in_array($v->role_id,$adminrole)) checked @endif type="checkbox" name="role[]" lay-skin="primary" value="{{$v->role_id}}" title="{{$v->role_name}}">
+              @endforeach
+            </div>
+        </div>
 
         <div class="layui-form-item">
             <label class="layui-form-label"></label>

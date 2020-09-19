@@ -9,6 +9,10 @@ use App\Http\Requests\StoreAdminPost;
 
 use Gregwar\Captcha\CaptchaBuilder;
 use Gregwar\Captcha\PhraseBuilder;
+use App\Models\Admin_role;
+use App\Models\Role;
+use DB;
+use Illuminate\Support\Facades\Hash;
 class AdminController extends Controller
 {
     //登录
@@ -60,7 +64,7 @@ class AdminController extends Controller
         if(!$res){
             return redirect('/login')->with('msg','用户名有误');
         }
-        if($admin_pwd!=decrypt($res['admin_pwd'])){
+        if(!Hash::check($admin_pwd, $res->admin_pwd)){
             return redirect('/login')->with('mng','密码错误');
         }
         //验证码
@@ -75,7 +79,7 @@ class AdminController extends Controller
 
         $request->session()->put('admin',$res);
         if($res){
-            return redirect('/admin');
+            return redirect('/main');
         }
 
     }
@@ -83,18 +87,40 @@ class AdminController extends Controller
 
     //表单
     public function create(){
-        return view('admin.admin.create');
+        $role = Role::all();
+        //dd($role);
+        return view('admin.admin.create',['role'=>$role]);
     }
     //添加
     public function store(StoreAdminPost $request){
-        $post = request()->except('_token');
-        //dd($post);
-        $post['admin_pwd'] = encrypt($post['admin_pwd']);
-        //dd($post['admin_pwd']);
-        $data=Admin::create($post);
-        if($data){
-            return redirect('/admin');
-        }
+        DB::beginTransaction();
+        try {
+            $role = $request->role;
+            //dd($role);
+            $post = request()->except('_token','role');
+            //dd($post);
+            $post['admin_pwd'] = bcrypt($post['admin_pwd']);
+            //dd($post['admin_pwd']);
+            $data=Admin::create($post);
+            if($data){
+                //管理员角色表入库
+                if(count($role)){
+                    foreach($role as $v){
+                        $admin_role[] =[
+                            'admin_id' => $data->admin_id,
+                            'role_id' => $v
+                        ];
+                    }
+                    $res=Admin_role::insert($admin_role);
+                    //dump($res);
+                }
+                DB::commit();
+                return redirect('/admin');
+            }
+        } catch (\Throwable $e) {
+            dump($e->getMessage());
+            DB::rollBack();
+        }   
     }
     //文件拖拽
     public function upload(Request $request){
@@ -118,13 +144,18 @@ class AdminController extends Controller
     }
     //修改展示
     public function edit($id){
+        $role = Role::all();
+        // dd($role);
+        $roles = Admin_role::where('admin_id',$id)->pluck('role_id');
+        $adminrole = $roles?$roles->toArray():[];
+        // dd($res);
         $res=Admin::where('admin_id',$id)->first();
-        return view('admin.admin.edit',['res'=>$res]);
+        return view('admin.admin.edit',['res'=>$res,'role'=>$role,'adminrole'=>$adminrole]);
     }
     //执行修改
     public function updata(StoreAdminPost $request,$id){
-        $post = request()->except('_token');
-        //dd($post);
+        $post = request()->except('_token','role');
+        // dd($post);
         $data=Admin::where('admin_id',$id)->update($post);
         if($data){
             return redirect('/admin');
@@ -132,7 +163,6 @@ class AdminController extends Controller
     }
     //删除
     public function destroy($id){
-       
         $res=Admin::destroy($id);
         if(request()->ajax()){
             return $this->success('删除成功!');
@@ -145,9 +175,8 @@ class AdminController extends Controller
     //退出登录
     public function loginout()
     {
-       request()->session()->flush('admin');
-       
-        
+       request()->session()->flush();
+       return redirect('/login');
     }
 
 

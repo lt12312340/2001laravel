@@ -8,9 +8,11 @@ function upload($filename){
         }
     }
 
-//无限极分类
+//分类无限极分类
 function createTree($data,$parent_id=0,$level=0){
-    if(!$data) return;
+    if(!$data){
+        return;
+    } 
 
     static $newArray=[];
 
@@ -23,4 +25,23 @@ function createTree($data,$parent_id=0,$level=0){
     }
     return $newArray;
     
-} 
+}
+
+//权限无限极分类
+function menuTree($data,$parent_id=0,$level=0){
+    if(!$data){
+        return;
+    } 
+
+    static $newArray=[];
+
+    foreach($data as $v){
+        if($v->parent_id==$parent_id){
+            $v->level=$level;
+            $newArray[]=$v;
+            menuTree($data,$v->id,$level+1);
+        }
+    }
+    return $newArray;
+    
+}

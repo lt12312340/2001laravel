@@ -6,6 +6,9 @@
   <title>layout 后台大布局 - Layui</title>
   <link rel="stylesheet" href="/static/layui/css/layui.css">
   <meta name="csrf-token" content="{{ csrf_token() }}">
+  <link rel="stylesheet" type="text/css" href="/al/dialog.css">
+  <script src="/al/zepto.min.js"></script>
+  <script type="text/javascript" src="/al/dialog.min.js"></script>
 </head>
 <body class="layui-layout-body">
 <div class="layui-layout layui-layout-admin">

@@ -60,7 +60,14 @@
             </div>
         </div>
 
-       
+        <div class="layui-form-item">
+            <label class="layui-form-label">角色:</label>
+            <div class="layui-input-block">
+              @foreach($role as $v)
+              <input type="checkbox" name="role[]" lay-skin="primary" value="{{$v->role_id}}" title="{{$v->role_name}}">
+              @endforeach
+            </div>
+        </div>
 
         <div class="layui-form-item">
             <label class="layui-form-label"></label>
@@ -78,9 +85,9 @@
 <script src="/static/layui/layui.js"></script>
 <script>
 //JavaScript代码区域
-layui.use('element', function(){
+layui.use(['element','form'], function(){
   var element = layui.element;
-  
+  var form = layui.form;
 });
 
 layui.use('upload', function(){

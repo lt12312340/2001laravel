@@ -205,7 +205,10 @@ function DeleteGetId(brand_id,obj){
     }
 
     $.get('/brand/destroy/'+brand_id,function(res){
-      alert(res.msg);
+      //alert(res.msg);
+      popup({type:'tip',msg:res.msg,delay:3000,callBack:function(){
+        
+      }});
       //$(obj).parents('tr').hide();
       //$(obj).parents('tr').remove();
       location.reload();

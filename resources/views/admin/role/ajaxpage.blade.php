@@ -17,6 +17,9 @@
                     <a href="{{url('role/edit/'.$v->role_id)}}">
                     <button type="button" class="layui-btn layui-btn-normal">编辑</button>
                     </a>
+                    <a href="{{url('role/addpriv/'.$v->role_id)}}">
+                    <button type="submit" class="layui-btn" lay-submit="" lay-filter="demo1">添加权限</button>
+                    </a>
                 </td>
             </tr>
             @endforeach

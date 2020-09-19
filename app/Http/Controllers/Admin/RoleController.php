@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Role;
+use App\Models\Menu;
+use App\Models\Role_menu;
 use App\Http\Requests\StoreRolePost;
 class RoleController extends Controller
 {
@@ -52,6 +54,38 @@ class RoleController extends Controller
         if($res){
             return redirect('/role');
         }
+    }
+
+    //角色添加权限视图
+    public function addpriv($role_id){
+        //dump($role_id);
+        $Menu = Menu::get();
+        //dd($Menu);
+        $role_menu = Role_menu::where('role_id',$role_id)->pluck('menu_id');
+        
+        $role_menu = count($role_menu)?$role_menu->toArray():[];
+        // dd($role_menu);
+        $Menu = menuTree($Menu);
+        return view('admin/role/addpriv',['menu'=>$Menu,'role_id'=>$role_id,'role_menu'=>$role_menu]);
+    }
+
+    //角色权限添加
+    public function addprivdo(Request $request){
+        $post = $request->except('_token');
+        // dd($post);
+        if(isset($post['menucheck'])){
+            Role_menu::where('role_id',$post['role_id'])->delete();
+            $data = [];
+            foreach($post['menucheck'] as $v){
+                $data[]=[
+                    'role_id' => $post['role_id'],
+                    'menu_id' => $v
+                ];
+            }
+            // dump($data);
+            Role_menu::insert($data);
+        }
+        return redirect('/role');
     }
 
     /**

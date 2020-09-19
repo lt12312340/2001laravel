@@ -33,6 +33,18 @@
             </div>
         </div>
 
+        <div class="layui-inline">
+          <label class="layui-form-label">父级菜单</label>
+          <div class="layui-input-inline">
+            <select name="parent_id" lay-verify="required" lay-search="">
+              <option value="0">直接选择或搜索选择</option>
+              @foreach($menu as $v)
+              <option value="{{$v->id}}">{{str_repeat('|——',$v->level)}}{{$v->names}}</option>
+              @endforeach
+            </select>
+          </div>
+        </div>
+
         <div class="layui-form-item">
             <label class="layui-form-label">模块:</label>
             <div class="layui-input-block">
@@ -51,9 +63,9 @@
         </div>
 
         <div class="layui-form-item">
-            <label class="layui-form-label">方法:</label>
+            <label class="layui-form-label">路由别名:</label>
             <div class="layui-input-block">
-            <input type="text" name="function" lay-verify="title" autocomplete="off" placeholder="请输入方法" class="layui-input">
+            <input type="text" name="function" lay-verify="title" autocomplete="off" placeholder="请输入路由别名" class="layui-input">
             <b style="color:000; font-family:'仿宋'" >{{$errors->first('function')}}</b> 
             </div>
         </div> 
@@ -82,8 +94,9 @@
 <script src="/static/layui/layui.js"></script>
 <script>
 //JavaScript代码区域
-layui.use('element', function(){
-  var element = layui.element;
+layui.use(['element','form'], function(){
+  var element = layui.element,
+      form = layui.form;
   
 });
 

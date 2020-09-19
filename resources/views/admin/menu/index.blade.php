@@ -46,7 +46,7 @@
                 <th>权限名称</th>
                 <th>模块</th>
                 <th>控制器</th>
-                <th>方法</th>
+                <th>路由别名</th>
                 <th>路由</th>
                 <th>操作</th>
             </tr> 
@@ -57,7 +57,7 @@
                 <td><input type="checkbox" name="brandcheck[]" lay-skin="primary"  value="{{$v->id}}"></td>
                 <td>{{$v->id}}</td>
                 <td field="names">
-                  <span class="names">{{$v->names}}</span>
+                  <span class="names">{{str_repeat('|——',$v->level)}}{{$v->names}}</span>
                   <input type="text" class="changevalue" value="{{$v->names}}" style="display:none">
                 </td>
                 <td field="model">
@@ -87,12 +87,6 @@
             </tr>
             @endforeach
             
-            
-            <tr>
-                <td colspan="8" align="center">
-                <button type="button" class="layui-btn layui-btn-warm moredel">批量删除</button>{{$menu->appends($query)->links('vendor.pagination.adminshop')}}
-                </td>
-            </tr>
             </tbody>       
         </table>
         
