@@ -39,7 +39,7 @@
             <select name="parent_id" lay-verify="required" lay-search="">
               <option value="0">直接选择或搜索选择</option>
               @foreach($menu as $v)
-              <option value="{{$v->id}}">{{str_repeat('|——',$v->level)}}{{$v->names}}</option>
+              <option value="{{$v->menu_id}}">{{str_repeat('|——',$v->level)}}{{$v->names}}</option>
               @endforeach
             </select>
           </div>

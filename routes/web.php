@@ -96,6 +96,19 @@ Route::post('/menu/check_name','Admin\MenuController@check_name')->name('menu.ch
 Route::get('/menu/destroy/{id?}','Admin\MenuController@destroy')->name('menu.destroy');
 Route::get('/menu/edit/{id}','Admin\MenuController@edit')->name('menu.edit');
 Route::post('/menu/update/{id}','Admin\MenuController@update')->name('menu.update');
+
+//商品属性
+Route::prefix('/attribute')->group(function(){
+    Route::get('/create','Admin\AttributeController@create')->name('attribute.create');//表单展示
+    Route::post('store','Admin\AttributeController@store')->name('attribute.store');//执行添加
+    Route::any('/','Admin\AttributeController@index')->name('attribute');//列表展示
+    Route::post('/check_name','Admin\AttributeController@check_name')->name('attribute.check_name');//即点即改
+    Route::get('/destroy/{attr_id?}','Admin\AttributeController@destroy')->name('attribute.destroy');//单删  批删
+    Route::get('/edit/{attr_id}','Admin\AttributeController@edit')->name('attribute.edit');//修改页面
+    Route::post('/update/{attr_id}','Admin\AttributeController@update')->name('attribute.update');//执行修改
+});
+
+
 });
 
 Route::get('/loginout','Admin\AdminController@loginout');//退出登录
