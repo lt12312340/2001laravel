@@ -100,10 +100,15 @@ Route::post('/menu/update/{id}','Admin\MenuController@update')->name('menu.updat
 
 // 商品类型
 Route::prefix('/goods_type')->group(function(){
-    Route::get('/create','Admin\GoodsTypeController@create')->name('goods_type.create');
-    Route::post('/store','Admin\GoodsTypeController@store')->name('goods_type.store');
-    Route::get('/index','Admin\GoodsTypeController@index')->name('goods_type.index');
+    Route::get('/create','Admin\GoodsTypeController@create')->name('goods_type.create');//添加页面
+    Route::post('/store','Admin\GoodsTypeController@store')->name('goods_type.store');//执行添加
+    Route::get('/index','Admin\GoodsTypeController@index')->name('goods_type.index');//列表展示
     Route::get('/destroy/{cat_id?}','Admin\GoodsTypeController@destroy')->name('goods_type.destroy');//单删  批删
+    Route::post('/check_name','Admin\GoodsTypeController@check_name')->name('goods_type.check_name');//名称即点即改
+    Route::any('/check_typeshows','Admin\GoodsTypeController@check_typeshows')->name('goods_type.check_typeshows');//对错号
+    Route::get('/edit/{cat_id}','Admin\GoodsTypeController@edit')->name('goods_type.edit');//修改页面
+    Route::post('/update/{cat_id}','Admin\GoodsTypeController@update')->name('goods_type.update');//执行修改
+    Route::any('/attrshow/{cat_id}','Admin\GoodsTypeController@attrshow')->name('goods_type.attrshow');//商品属性列表
 });
 
 //商品属性

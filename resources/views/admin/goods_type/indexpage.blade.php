@@ -2,16 +2,24 @@
             <tr cat_id="{{$v->cat_id}}">
                 <td><input type="checkbox" name="goodstypecheck[]" lay-skin="primary"  value="{{$v->cat_id}}"></td>
                 <td>{{$v->cat_id}}</td>
-                <td field="cat_name" old="{{$v->cat_name}}">
-                  <span class="span_name">{{$v->cat_name}}</span>
+                <td field="cat_name">
+                  <span class="change">{{$v->cat_name}}</span>
+                  <input type="text" class="changevalue" value="{{$v->cat_name}}" style="display:none">
                 </td>
-                <td cat_id="{{$v->cat_id}}" class="hubei" status='{{$v->enabled}}' filed="enabled">{{$v->enabled=='1' ? "√" : "×"}}</td>
+
+                <td field="enabled" class="changevalue" value="{{$v->enabled}}">
+                  @if($v->enabled == 1) √ @else × @endif
+                </td>
+
                 <td>
                     <a href="javascript:void(0)" onclick="DeleteGetId({{$v->cat_id}},this)">
                     <button type="button" class="layui-btn layui-btn-danger">删除</button>
                     </a>
-                    <a href="/goods_type/edit?cate_id={{$v->cat_id}}">
+                    <a href="{{url('/goods_type/edit/'.$v->cat_id)}}">
                     <button type="button" class="layui-btn layui-btn-normal">编辑</button>
+                    </a>
+                    <a href="{{url('/goods_type/attrshow/'.$v->cat_id)}}">
+                    <button type="button" class="layui-btn" >属性列表</button>
                     </a>
                 </td>
             </tr>
