@@ -19,7 +19,7 @@
         <div class="message">Fixed Assets-管理登录</div>
         <div id="darkbannerwrap"></div>
         
-        <form class="layui-form" action="{{url('/logindo')}}" post="post">
+        <form class="layui-form" action="{{url('/logindo')}}" method="post">
         
             <input name="admin_name"id='username'  placeholder="用户名"  type="text" lay-verify="required" class="layui-input" >
             <font color=red>{{session('msg')}}</font>
