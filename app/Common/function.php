@@ -32,16 +32,17 @@ function menuTree($data,$parent_id=0,$level=0){
     if(!$data){
         return;
     } 
-
+    // dd($data);
     static $newArray=[];
 
     foreach($data as $v){
         if($v->parent_id==$parent_id){
             $v->level=$level;
             $newArray[]=$v;
-            menuTree($data,$v->id,$level+1);
+            menuTree($data,$v->menu_id,$level+1);
         }
     }
+    // dd($newArray);
     return $newArray;
     
 }

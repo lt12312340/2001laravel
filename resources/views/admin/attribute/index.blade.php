@@ -7,8 +7,8 @@
         <legend>
             <span class="layui-breadcrumb">
                 <a href="/">后台首页</a>
-                <a href="/demo/">权限管理</a>
-                <a><cite>权限展示</cite></a>
+                <a href="/demo/">商品属性</a>
+                <a><cite>属性展示</cite></a>
             </span>
         </legend>
     </fieldset>
@@ -18,16 +18,41 @@
                 <h2 class="layui-colla-title">多条件搜索</h2>
                 <div class="layui-colla-content">
                   <div style="padding: 15px;" id="showinput">
-                    <form action="{{url('/menu')}}" method="get" enctype="multipart/form-data">
+                    <form action="{{url('/attribute')}}" method="get" enctype="multipart/form-data">
                       @CSRF
-                      <input type="text" name="names" style='width: 280px;' placeholder="请输入权限名称" value="{{$query['names']??''}}" class="layui-input">
-                      <input type="text" name="model" style='width: 280px;' placeholder="请输入模块" value="{{$query['model']??''}}" class="layui-input">
+                      <input type="text" name="attr_name" style='width: 280px;' placeholder="请输入属性名称" value="{{$query['attr_name']??''}}" class="layui-input">
+                      <select name="cat_id" id="">
+                          <option value="">直接选择或搜索选择</option>
+                          @foreach($cat as $v)
+                          <option @if($cat_id == $v->cat_id) selected @endif value="{{$v->cat_id}}">{{$v->cat_name}}</option>
+                          @endforeach
+                      </select>
                       <button type="submit" class="layui-btn" lay-submit="" lay-filter="demo1">立即提交</button>
                     </form>
                   </div>
                 </div>
               </div>
             </div>
+
+<!-- <form class="layui-form" action="{{url('/brand')}}" >
+
+  <div class="layui-form-item">
+    <div class="layui-inline">
+      <label class="layui-form-label">商品名称</label>
+      <div class="layui-input-inline">
+        <input type="text" name="brand_name" lay-verify="required|phone" autocomplete="off" class="layui-input" placeholder="商品名称" value="{{$query['brand_name']??''}}">
+      </div>
+    </div>
+    <div class="layui-inline">
+      <label class="layui-form-label">商品网址</label>
+      <div class="layui-input-inline">
+        <input type="text" name="brand_url" lay-verify="email" autocomplete="off" class="layui-input" placeholder="商品网址" value="{{$query['brand_url']??''}}">
+      </div>
+    </div>
+    <button type="submit" class="layui-btn layui-btn-warm">搜索</button>
+  </div>
+  
+</form> -->
 
     <div class="layui-form">
         <table class="layui-table">
@@ -42,51 +67,46 @@
                 <th>
                   <input type="checkbox" name="allcheckbox" lay-skin="primary" class="vainglory" >
                 </th>
-                <th>权限id</th>
-                <th>权限名称</th>
-                <th>模块</th>
-                <th>控制器</th>
-                <th>路由别名</th>
-                <th>路由</th>
+                <th>属性id</th>
+                <th>属性名称</th>
+                <th>商品分类名称</th>
+                <th>属性值</th>
                 <th>操作</th>
             </tr> 
             </thead>
             <tbody>
-            @foreach($menu as $v)
-            <tr id = {{$v->menu_id}}>
-                <td><input type="checkbox" name="brandcheck[]" lay-skin="primary"  value="{{$v->menu_id}}"></td>
-                <td>{{$v->menu_id}}</td>
-                <td field="names">
-                  <span class="names">{{str_repeat('|——',$v->level)}}{{$v->names}}</span>
-                  <input type="text" class="changevalue" value="{{$v->names}}" style="display:none">
-                </td>
-                <td field="model">
-                  <span class="brand_name">{{$v->model}}</span>
-                  <input type="text" class="changevalue" value="{{$v->model}}" style="display:none">
-                </td>
-                <td field="controller">
-                  <span class="brand_name">{{$v->controller}}</span>
-                  <input type="text" class="changevalue" value="{{$v->controller}}" style="display:none">
-                </td>
-                 <td field="brand_desc">
-                  <span class="function">{{$v->function}}</span>
-                  <input type="text" class="changevalue" value="{{$v->function}}" style="display:none">
-                </td>
-                 <td field="brand_desc">
-                  <span class="route">{{$v->route}}</span>
-                  <input type="text" class="changevalue" value="{{$v->route}}" style="display:none">
+            @foreach($attribute as $v)
+            <tr attr_id = {{$v->attr_id}}>
+                <td><input type="checkbox" name="attrcheck[]" lay-skin="primary"  value="{{$v->attr_id}}"></td>
+                <td>{{$v->attr_id}}</td>
+                <td field="attr_name">
+                  <span class="brand_name">{{$v->attr_name}}</span>
+                  <input type="text" class="changevalue" value="{{$v->attr_name}}" style="display:none">
                 </td>
                 <td>
-                    <a href="javascript:void(0)" onclick="DeleteGetId({{$v->menu_id}},this)">
+                  {{$v->cat_name}}
+                </td>
+                <td field="attr_values">
+                  <span class="brand_name">{{$v->attr_values}}</span>
+                  <input type="text" class="changevalue" value="{{$v->attr_values}}" style="display:none">
+                </td>
+                <td>
+                    <a href="javascript:void(0)" onclick="DeleteGetId({{$v->attr_id}},this)">
                     <button type="button" class="layui-btn layui-btn-danger">删除</button>
                     </a>
-                    <a href="{{url('menu/edit/'.$v->menu_id)}}">
+                    <a href="{{url('attribute/edit/'.$v->attr_id)}}">
                     <button type="button" class="layui-btn layui-btn-normal">编辑</button>
                     </a>
                 </td>
             </tr>
             @endforeach
             
+            
+            <tr>
+                <td colspan="6" align="center">
+                <button type="button" class="layui-btn layui-btn-warm moredel">批量删除</button>{{$attribute->links('vendor.pagination.adminshop')}}
+                </td>
+            </tr>
             </tbody>       
         </table>
         
@@ -100,8 +120,8 @@ layui.use(['element','form'], function(){
   var element = layui.element;
   var form = layui.form;
   //即点即改
-  layui.$(document).on('click','.names',function(){
-    //alert(123);
+  layui.$(document).on('click','.brand_name',function(){
+	  //alert(123);
     //获取点击对象
     var _this=layui.$(this);
         _this.next("input").show();
@@ -114,7 +134,7 @@ layui.use(['element','form'], function(){
             //获取值
             var value=_this.val();
             //获取id
-            var id=_this.parents("tr").attr("id");
+            var attr_id=_this.parents("tr").attr("attr_id");
             //获取字段
             var field=_this.parent().attr("field");
             if(!value){
@@ -123,15 +143,16 @@ layui.use(['element','form'], function(){
             }
             layui.$.ajax({
                 //提交地址
-                url:"{{url('/menu/check_name')}}",
+                url:"{{url('/attribute/check_name')}}",
                 //提交方式
                 type:"post",
                 //提交内容
-                data:{value:value,id:id,field:field},
+                data:{value:value,attr_id:attr_id,field:field},
                 //设置同步异步
                 async:true,
                 //回调函数
                 success:function(res){
+                  // alert(res);
                   //alert(typeof(res));
                     if(res==0){
                         _this.prev("span").text(value).show();
@@ -147,10 +168,10 @@ layui.use(['element','form'], function(){
 
 //全选
 $(document).on('click','.layui-form-checkbox:eq(0)',function(){
-  //alert(123321);
-  var checkval = $('input[name="allcheckbox"]').prop('checked');
-  //alert(checkval);
-  $('input[name="brandcheck[]"]').prop('checked',checkval);
+//   alert(123321);
+  var checkval = $('input[name="allcheckbox"').prop('checked');
+//   alert(checkval);
+  $('input[name="attrcheck[]"]').prop('checked',checkval);
   if(checkval){
     $('.layui-form-checkbox:gt(0)').addClass('layui-form-checked');
   }else{
@@ -162,15 +183,15 @@ $(document).on('click','.layui-form-checkbox:eq(0)',function(){
 //批量删除
 $(document).on('click','.moredel',function(){
 //$('.moredel').click(function(){
-  //alert(123);
+//   alert(123);
   var ids = new Array();
-  $('input[name="brandcheck[]"]:checked').each(function(i,k){
+  $('input[name="attrcheck[]"]:checked').each(function(i,k){
     ids.push($(this).val())
   });
-  //alert(ids);
+//   alert(ids);
   if(confirm('所以爱会消失是吗?')){
-      $.get('/menu/destroy/',{id:ids},function(res){
-            alert(res.msg);
+      $.get('/attribute/destroy/',{id:ids},function(res){
+            alert(res);
             //$(obj).parents('tr').hide();
             //$(obj).parents('tr').remove();
             location.reload();
@@ -180,14 +201,17 @@ $(document).on('click','.moredel',function(){
 })
 
 //删除
-function DeleteGetId(id,obj){
+function DeleteGetId(attr_id,obj){
     //alert(brand_id);
-    if(!id){
+    if(!attr_id){
       return;
     }
 
-    $.get('/menu/destroy/'+id,function(res){
-      alert(res.msg);
+    $.get('/attribute/destroy/'+attr_id,function(res){
+      //alert(res.msg);
+      popup({type:'tip',msg:res.msg,delay:3000,callBack:function(){
+        
+      }});
       //$(obj).parents('tr').hide();
       //$(obj).parents('tr').remove();
       location.reload();
@@ -204,9 +228,9 @@ function DeleteGetId(id,obj){
 
 
 $(document).on('click','.layui-laypage a',function(){
-  //alert(123);
+//   alert(123);
   var url = $(this).attr('href');
-  //alert(url);
+//   alert(url);
   $.get(url,function(res){
       $('tbody').html(res);
       $('.vainglory').prop('checked',false);

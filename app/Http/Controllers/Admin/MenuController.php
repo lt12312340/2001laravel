@@ -15,6 +15,7 @@ class MenuController extends Controller
      */
     public function index()
     {
+        // dd(123);
         $names = request()->names;
         $model=request()->model;
         $where = [];
@@ -27,8 +28,9 @@ class MenuController extends Controller
         }
          //$menu = Menu::where($where)->orderBy('id','desc')->paginate(3);
          $menu = Menu::get();
-        //dd($Menu);
+        // dd($menu);
         $menu = menuTree($menu);
+        // dd(123);
         if(request()->ajax()){
             return view('admin/menu/ajaxpage',['menu'=>$menu,'query'=>request()->all()]);
         }
@@ -80,7 +82,7 @@ class MenuController extends Controller
         //     $brand_logo=upload("brand_logo");
         // }
         // $brand['brand_logo'] = $brand_logo;
-        //dd($brand);
+        // dd($menu);
         $res = Menu::create($menu);
         //dd($res);
         if($res){
