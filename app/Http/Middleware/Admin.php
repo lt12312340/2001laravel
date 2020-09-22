@@ -29,7 +29,7 @@ class Admin
         if($name!='main' && $res->admin_id != 41){
            // dd('执行了');
         //权限判断
-        $priv = DB::select("select DISTINCT rm.menu_id,m.* from role_menu as rm inner join menu as m on rm.menu_id=m.id inner join admin_role as ar on ar.role_id = rm.role_id where ar.admin_id='$res->admin_id' and m.function='$name'");
+        $priv = DB::select("select DISTINCT rm.menu_id,m.* from role_menu as rm inner join menu as m on rm.menu_id=m.menu_id inner join admin_role as ar on ar.role_id = rm.role_id where ar.admin_id='$res->admin_id' and m.function='$name'");
         //dd($priv);
         //  dd($priv);
     
@@ -49,7 +49,7 @@ class Admin
         if($res->admin_name == 'supper'){
             $privmenu = DB::select("select * from menu where is_show = 1");
         }else{
-            $privmenu = DB::select("select DISTINCT rm.menu_id,m.* from role_menu as rm inner join menu as m on rm.menu_id=m.id inner join admin_role as ar on ar.role_id = rm.role_id where m.is_show =1 and ar.admin_id='$res->admin_id'");
+            $privmenu = DB::select("select DISTINCT rm.menu_id,m.* from role_menu as rm inner join menu as m on rm.menu_id=m.menu_id inner join admin_role as ar on ar.role_id = rm.role_id where m.is_show =1 and ar.admin_id='$res->admin_id'");
         }
 
         //控制左侧菜单的展示

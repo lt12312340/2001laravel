@@ -96,12 +96,22 @@ Route::post('/menu/check_name','Admin\MenuController@check_name')->name('menu.ch
 Route::get('/menu/destroy/{id?}','Admin\MenuController@destroy')->name('menu.destroy');
 Route::get('/menu/edit/{id}','Admin\MenuController@edit')->name('menu.edit');
 Route::post('/menu/update/{id}','Admin\MenuController@update')->name('menu.update');
+
+
+// 商品类型
+Route::prefix('/goods_type')->group(function(){
+    Route::get('/create','Admin\GoodsTypeController@create')->name('goods_type.create');
+    Route::post('/store','Admin\GoodsTypeController@store')->name('goods_type.store');
+    Route::get('/index','Admin\GoodsTypeController@index')->name('goods_type.index');
+    Route::get('/destroy/{cat_id?}','Admin\GoodsTypeController@destroy')->name('goods_type.destroy');//单删  批删
+});
+
 });
 
 Route::get('/loginout','Admin\AdminController@loginout');//退出登录
 //登录
 Route::get('/login','Admin\AdminController@login');//登录
-Route::get('/logindo','Admin\AdminController@logindo');//执行登录
+Route::post('/logindo','Admin\AdminController@logindo');//执行登录
 Route::get('/getCaptcha','Admin\AdminController@getCaptcha')->name('getCaptcha');//验证码
 
 //403
