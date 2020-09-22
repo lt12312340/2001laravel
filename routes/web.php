@@ -113,7 +113,7 @@ Route::prefix('/goods_type')->group(function(){
 
 //商品属性
 Route::prefix('/attribute')->group(function(){
-    Route::get('/create','Admin\AttributeController@create')->name('attribute.create');//表单展示
+    Route::get('/create/{cat_id}','Admin\AttributeController@create')->name('attribute.create');//表单展示
     Route::post('store','Admin\AttributeController@store')->name('attribute.store');//执行添加
     Route::any('/','Admin\AttributeController@index')->name('attribute');//列表展示
     Route::post('/check_name','Admin\AttributeController@check_name')->name('attribute.check_name');//即点即改

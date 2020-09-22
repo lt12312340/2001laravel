@@ -61,13 +61,11 @@
              </div>
         </div>
 
-        <div class="layui-form-item">
-            <label class="layui-form-label">属性值:</label>
-            <div class="layui-input-block">
-            <!-- <input type="text" name="attr_values" lay-verify="title" autocomplete="off" placeholder="请输入属性值" class="layui-input" value="{{$attribute->attr_values}}"> -->
-            <textarea type="text" class="layui-disabled" name="attr_values" id="" cols="30" rows="10"></textarea>
-            <b style="color:000; font-family:'仿宋' ">{{$errors->first('attr_values')}}</b> 
-            </div>
+        <div class="layui-form-item layui-form-text">
+          <label class="layui-form-label">属性值</label>
+          <div class="layui-input-block">
+            <textarea placeholder="请输入内容" name="attr_values" id="attr_values" class="layui-textarea layui-disabled" disabled="disabled">{{$attribute->attr_values}}</textarea>
+          </div>
         </div>
 
         <div class="layui-form-item">
@@ -84,6 +82,8 @@
   
 
 <script src="/static/layui/layui.js"></script>
+<script src="/static/layui/jquery.js"></script>
+
 <script>
 //JavaScript代码区域
 layui.use(['element','form'], function(){
@@ -114,6 +114,23 @@ layui.use('upload', function(){
     }
   });
 });
+</script>
+
+<script>
+  $(document).on('click','.layui-form-radio:gt(1)',function(){
+  // alert(123);
+    var find = $(this).prev().attr('value');
+    // alert(find);
+    if(find == '1'){
+      // alert(123);
+      $('#attr_values').addClass('layui-disabled'); 
+      $('#attr_values').attr('disabled','disabled');
+    }else{
+      // alert(31);
+      $('#attr_values').removeClass('layui-disabled'); 
+      $('#attr_values').removeAttr('disabled'); 
+    }
+})
 </script>
 
 @endsection

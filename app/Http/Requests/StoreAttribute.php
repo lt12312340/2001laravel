@@ -28,7 +28,6 @@ class StoreAttribute extends FormRequest
                 'required',Rule::unique('attribute')->ignore(request()->attr_id,'attr_id')
             ],
             'cat_id' => 'required',
-            'attr_values'=>'required'
         ];
     }
 
@@ -37,7 +36,6 @@ class StoreAttribute extends FormRequest
             'attr_name.required' => '属性名称不能为空',
             'attr_name.unique' => '属性名称已存在',
             'cat_id.required' => '商品分类不能为空',
-            'attr_values.required' => '属性值不能为空'
         ];
     }
 }

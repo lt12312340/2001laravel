@@ -115,6 +115,6 @@ class GoodsTypeController extends Controller
     public function attrshow($id){
         $attribute = GoodsType::leftjoin('attribute','goods_type.cat_id','=','attribute.cat_id')->where('attribute.cat_id',$id)->get();
         //dd($attribute); 
-        return view('admin.goods_type.attrshow',['attribute'=>$attribute]);
+        return view('admin.goods_type.attrshow',['attribute'=>$attribute,'cat_id'=>$id]);
     }
 }

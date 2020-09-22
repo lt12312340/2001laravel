@@ -39,7 +39,7 @@
             <select name="cat_id" lay-verify="required" lay-search="">
               <option value="0">直接选择或搜索选择</option>
               @foreach($cat as $v)
-              <option value="{{$v->cat_id}}">{{$v->cat_name}}</option>
+              <option @if($v->cat_id == $cat_id) selected @endif value="{{$v->cat_id}}">{{$v->cat_name}}</option>
               @endforeach
             </select>
           </div>
@@ -64,7 +64,7 @@
         <div class="layui-form-item layui-form-text">
           <label class="layui-form-label">属性值</label>
           <div class="layui-input-block">
-            <textarea placeholder="请输入内容" name="attr_values" id="attr_values" class="layui-textarea layui-disabled"></textarea>
+            <textarea placeholder="请输入内容" name="attr_values" id="attr_values" class="layui-textarea layui-disabled" disabled="disabled"></textarea>
           </div>
         </div>
 
@@ -120,16 +120,18 @@ layui.use('upload', function(){
 
 <script>
   
-$(document).on('click','.layui-form-radio',function(){
+$(document).on('click','.layui-form-radio:gt(1)',function(){
   // alert(123);
     var find = $(this).prev().attr('value');
     // alert(find);
     if(find == '1'){
       // alert(123);
-      $('#attr_values').attr('class','layui-disabled'); 
+      $('#attr_values').addClass('layui-disabled'); 
+      $('#attr_values').attr('disabled','disabled');
     }else{
       // alert(31);
       $('#attr_values').removeClass('layui-disabled'); 
+      $('#attr_values').removeAttr('disabled'); 
     }
 })
 

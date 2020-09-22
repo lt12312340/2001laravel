@@ -42,11 +42,11 @@ class AttributeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($cat_id)
     {
         $cat = Goods_type::get();
         // dd($cat);
-        return view('admin/attribute/create',['cat'=>$cat]);
+        return view('admin/attribute/create',['cat'=>$cat,'cat_id'=>$cat_id]);
     }
 
     /**
@@ -62,7 +62,7 @@ class AttributeController extends Controller
         $res = Attribute::insert($attribute);
         // dd($res);
         if($res){
-            return redirect('/attribute');
+            return redirect('/goods_type/attrshow/'.$attribute['cat_id']);
         }
     }
 
@@ -101,10 +101,11 @@ class AttributeController extends Controller
     public function update(StoreAttribute  $request, $id)
     {
         $attribute = $request->except('_token');
+        $cat_id = $request->cat_id;
         // dd($attribute);
         $res = Attribute::where('attr_id',$id)->update($attribute);
         if($res!==false){
-            return redirect('/attribute');
+            return redirect('/goods_type/attrshow/'.$cat_id);
         }
     }
 
