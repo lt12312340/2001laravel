@@ -45,10 +45,27 @@
           </div>
         </div>
 
+        <div class="layui-form-item" pane="">
+             <label class="layui-form-label">属性是否可选:</label>
+             <div class="layui-input-block">
+               <input type="radio" name="attr_type" value="1" title="属性" @if($attribute->attr_type == 1) checked @endif >
+               <input type="radio" name="attr_type" value="2" title="规格" @if($attribute->attr_type == 2) checked @endif>
+             </div>
+        </div>
+
+        <div class="layui-form-item" pane="">
+             <label class="layui-form-label">录入方式:</label>
+             <div class="layui-input-block">
+               <input type="radio" name="attr_input_type" value="1" title="手工录入" @if($attribute->attr_input_type == 1) checked @endif>
+               <input type="radio" name="attr_input_type" value="2" title="列表选中" @if($attribute->attr_input_type == 2) checked @endif>
+             </div>
+        </div>
+
         <div class="layui-form-item">
             <label class="layui-form-label">属性值:</label>
             <div class="layui-input-block">
-            <input type="text" name="attr_values" lay-verify="title" autocomplete="off" placeholder="请输入属性值" class="layui-input" value="{{$attribute->attr_values}}">
+            <!-- <input type="text" name="attr_values" lay-verify="title" autocomplete="off" placeholder="请输入属性值" class="layui-input" value="{{$attribute->attr_values}}"> -->
+            <textarea type="text" class="layui-disabled" name="attr_values" id="" cols="30" rows="10"></textarea>
             <b style="color:000; font-family:'仿宋' ">{{$errors->first('attr_values')}}</b> 
             </div>
         </div>

@@ -20,7 +20,7 @@
                   <div style="padding: 15px;" id="showinput">
                     <form action="{{url('/attribute')}}" method="get" enctype="multipart/form-data">
                       @CSRF
-                      <input type="text" name="attr_name" style='width: 280px;' placeholder="请输入属性名称" value="{{$query['attr_name']??''}}" class="layui-input">
+                      <input type="text" name="attr_name" style='width: 280px;' placeholder="请输入属性名称" value="{{$attr_name??''}}" class="layui-input">
                       <select name="cat_id" id="">
                           <option value="">直接选择或搜索选择</option>
                           @foreach($cat as $v)
@@ -104,7 +104,7 @@
             
             <tr>
                 <td colspan="6" align="center">
-                <button type="button" class="layui-btn layui-btn-warm moredel">批量删除</button>{{$attribute->links('vendor.pagination.adminshop')}}
+                <button type="button" class="layui-btn layui-btn-warm moredel">批量删除</button>{{$attribute->appends(['attr_name'=>$attr_name,'cat_id'=>$cat_id])->links('vendor.pagination.adminshop')}}
                 </td>
             </tr>
             </tbody>       

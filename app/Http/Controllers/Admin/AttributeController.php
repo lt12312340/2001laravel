@@ -32,9 +32,9 @@ class AttributeController extends Controller
         // dd($cat);
         $attribute = Attribute::leftjoin('goods_type','attribute.cat_id','=','goods_type.cat_id')->where($where)->orderBy('attr_id','desc')->paginate(10);
         if(request()->ajax()){
-            return view('admin/attribute/ajaxpage',['attribute'=>$attribute,'cat'=>$cat,'query'=>request()->all()]);
+            return view('admin/attribute/ajaxpage',['attribute'=>$attribute,'cat'=>$cat,'attr_name'=>$attr_name,'cat_id'=>$cat_id]);
         }
-        return view('admin/attribute/index',['attribute'=>$attribute,'cat'=>$cat,'query'=>request()->all(),'cat_id'=>$cat_id]);
+        return view('admin/attribute/index',['attribute'=>$attribute,'cat'=>$cat,'attr_name'=>$attr_name,'cat_id'=>$cat_id]);
     }
 
     /**
