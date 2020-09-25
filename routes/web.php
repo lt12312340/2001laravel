@@ -47,8 +47,10 @@ Route::post('/brand/check_name','Admin\BrandController@check_name')->name('brand
 //商品
 Route::prefix('goods')->group(function(){
     Route::any('index','Admin\GoodsController@index')->name("goods");
+    Route::any('/getattr','Admin\GoodsController@getattr');
     Route::any('create','Admin\GoodsController@create')->name("goods.create");
     Route::post('upload','Admin\GoodsController@upload')->name("goods.upload");
+    Route::post('/product','Admin\GoodsController@product')->name("goods.product");//货品入库
     Route::any('store','Admin\GoodsController@store')->name("goods.store");
     Route::any('checkge','Admin\GoodsController@checkge');
     Route::any('ajaxji','Admin\GoodsController@ajaxji');
