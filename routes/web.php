@@ -13,9 +13,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 
 // Route::any('news/login','News\LoginController@login');
@@ -28,6 +28,7 @@ Route::get('/', function () {
 //     Route::any('product/{id}','News\NewsController@product');
 // });
 
+Route::domain('admin.laravel01.com')->group(function(){
 
 Route::middleware('checkuselogin')->group(function(){
 //后台首页
@@ -54,6 +55,8 @@ Route::prefix('goods')->group(function(){
     Route::any('store','Admin\GoodsController@store')->name("goods.store");
     Route::any('checkge','Admin\GoodsController@checkge');
     Route::any('ajaxji','Admin\GoodsController@ajaxji');
+    Route::get('/show/{goods_id}','Admin\GoodsController@show')->name("goods.show");//商品预览
+    Route::get('/getattrprice','Admin\GoodsController@getattrprice')->name("goods.getattrprice");//商品预览
     Route::get('destroy/{brand_id?}','Admin\GoodsController@destroy')->name("goods.destroy");
     Route::get('edit/{goods_id?}','Admin\GoodsController@edit')->name("goods.edit");
     Route::any('update/{goods_id}','Admin\GoodsController@update')->name("goods.update");
@@ -136,5 +139,15 @@ Route::get('/getCaptcha','Admin\AdminController@getCaptcha')->name('getCaptcha')
 //403
 Route::view('/403','admin.403');
 
+});
+
+
+//前台
+Route::domain('www.laravel01.com')->group(function(){
+    Route::any('/','Index\IndexController@index');//前台首页
+    Route::get('/login','Index\LoginController@login');//前台登录视图
+    Route::get('/register','Index\LoginController@register');//前台注册视图
+    Route::get('/sendcode','Index\LoginController@sendcode');//前台注册发送验证码
+});
 
 

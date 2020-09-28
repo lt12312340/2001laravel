@@ -213,7 +213,7 @@ class GoodsController extends Controller
                     $new_goods_specs['attr_name'][$v['attr_id']] = $v['attr_name'];
                     $new_goods_specs['attr_values'][$v['attr_id']][$v['goods_attr_id']] = $v['attr_value'];
                 }
-                // dump($new_goods_specs);
+                // dd($new_goods_specs);
                 $goods = Goods::select('goods_id','goods_name')->where('goods_id',$goods_id)->first();
                 return view('admin.goods.product',['goods_specs'=>$new_goods_specs,'goods'=>$goods]);
             }
@@ -246,7 +246,7 @@ class GoodsController extends Controller
             for($i=0;$i<$count;$i++){
                 $new_attr[] = array_column($attr,$i);
             }
-            // dd($new_attr);
+            // dump($new_attr);
             $produnct = [];
             foreach($new_attr as $k => $v){
                 $product[] = [
@@ -270,6 +270,8 @@ class GoodsController extends Controller
         return "shop".date("YmdHis").rand('1000','9999');
     }
 
+    
+
     //判断有没有规格
     public function GoodsSpecs($goods_id){
         $goods_attr = Goods_attr::select('goods_attr_id','goods_attr.attr_id','attribute.attr_name','goods_attr.attr_value')
@@ -286,10 +288,50 @@ class GoodsController extends Controller
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+     *///商品预览
+    public function show($goods_id)
     {
-        //
+        $goods = Goods::find($goods_id);
+        $gallery = Goods_gallery::where('goods_id',$goods_id)->get();//相册
+        // dd($gallery);
+        // dd($goods);
+
+        //基本属性
+        $goods_attr_base = Goods_attr::select('goods_attr_id','goods_attr.attr_id','attribute.attr_name','goods_attr.attr_value')
+        ->leftjoin('attribute','goods_attr.attr_id','=','attribute.attr_id')
+        ->where('goods_id',$goods_id)
+        ->where('attr_type',1)
+        ->get()->toArray();
+        // dd($goods_attr);
+
+        //规格属性
+        $goods_attr_specs = Goods_attr::select('goods_attr_id','goods_attr.attr_id','attribute.attr_name','goods_attr.attr_value')
+        ->leftjoin('attribute','goods_attr.attr_id','=','attribute.attr_id')
+        ->where('goods_id',$goods_id)
+        ->where('attr_type',2)
+        ->get()->toArray();
+        // dump($goods_attr_specs);
+        if($goods_attr_specs){
+            foreach($goods_attr_specs as $k => $v){
+                $new_goods_specs[$v['attr_id']]['attr_name'] = $v['attr_name'];
+                $new_goods_specs[$v['attr_id']]['attr_values'][$v['goods_attr_id']] = $v['attr_value'];
+            }
+        }
+        // dd($new_goods_specs);
+        return view('index/goodsshow',['goods'=>$goods,'gallery'=>$gallery,'goods_attr_base'=>$goods_attr_base,'goods_attr_specs'=>$new_goods_specs]);
+
+    }
+
+    public function getattrprice(){
+        $goods_attr_id = request()->goods_attr_id;
+        $goods_id = request()->goods_id;
+        // dd($goods_attr_id);
+        $goods_attr_price = Goods_attr::whereIn('goods_attr_id',$goods_attr_id)->sum('attr_price');
+        // dd($goods_attr_price);
+        $goods_price = Goods::where('goods_id',$goods_id)->value('goods_price')+$goods_attr_price;
+        // dd($goods_price);
+        $goods_price = number_format($goods_price,2,".","");
+        return $this->success('ok',['goods_price'=>$goods_price]);
     }
 
     /**

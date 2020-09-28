@@ -82,7 +82,7 @@
                 <th>是否精品</th>
                 <th>是否上架</th>
                 <th>商品图片</th>
-                <th>商品相册</th>
+                
                 <th>商品简介</th>
                 <th>商品品牌</th>
                 <th>商品分类</th>
@@ -111,20 +111,16 @@
                 <td goods_id="{{$v->goods_id}}" class="hubei" status='{{$v->is_best}}' filed="is_best">{{$v->is_best=='1' ? "√" : "×"}}</td>
                 <td goods_id="{{$v->goods_id}}" class="hubei" status='{{$v->is_up}}' filed="is_up">{{$v->is_up=='1' ? "√" : "×"}}</td>
                 <td>@if($v->goods_img)<img src="{{$v->goods_img}}" width="60"> @endif</td>
-                <td>
-                 @if($v->goods_imgs)
-                 	@php $goods_imgs = explode("|",$v["goods_imgs"]); @endphp
-                 	@foreach($goods_imgs as $vv)
-                 	<img src="{{$vv}}" width="35px" alt="">
-                 	@endforeach
-                 @endif
-                </td>
+                
                 <td field="goods_desc" old="{{$v->goods_desc}}">
                   <span class="span_name">{{$v->goods_desc}}</span>
                 </td>
                 <td>{{$v->brand_name}}</td>
                 <td>{{$v->cate_name}}</td>
                 <td>
+                    <a target="_blank" href="{{url('/goods/show/'.$v->goods_id)}}">
+                    <button type="button" class="layui-btn layui-btn-warm">预览</button>
+                    </a>
                     <a href="javascript:void(0)" onclick="DeleteGetId({{$v->goods_id}},this)">
                     <button type="button" class="layui-btn layui-btn-danger">删除</button>
                     </a>

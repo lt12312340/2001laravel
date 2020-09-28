@@ -33,6 +33,9 @@
                 <td>{{$v->brand_name}}</td>
                 <td>{{$v->cate_name}}</td>
                 <td>
+                    <a target="_blank" href="{{url('/goods/show/'.$v->goods_id)}}">
+                    <button type="button" class="layui-btn layui-btn-warm">预览</button>
+                    </a>
                     <a href="javascript:void(0)" onclick="DeleteGetId({{$v->goods_id}},this)">
                     <button type="button" class="layui-btn layui-btn-danger">删除</button>
                     </a>
