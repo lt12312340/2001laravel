@@ -28,7 +28,7 @@ use Illuminate\Support\Facades\Route;
 //     Route::any('product/{id}','News\NewsController@product');
 // });
 
-Route::domain('admin.laravel01.com')->group(function(){
+Route::domain('www.laravel01.com')->group(function(){
 
 Route::middleware('checkuselogin')->group(function(){
 //后台首页
@@ -143,11 +143,15 @@ Route::view('/403','admin.403');
 
 
 //前台
-Route::domain('www.laravel01.com')->group(function(){
+Route::domain('index.laravel01.com')->group(function(){
     Route::any('/','Index\IndexController@index');//前台首页
     Route::get('/login','Index\LoginController@login');//前台登录视图
     Route::get('/register','Index\LoginController@register');//前台注册视图
     Route::get('/sendcode','Index\LoginController@sendcode');//前台注册发送验证码
+    Route::post('/registerdo','Index\LoginController@registerdo');//注册
+    Route::post('/logindo','Index\LoginController@logindo');//登录
+    Route::get('/loginout','Index\LoginController@loginout');//退出登录
+    Route::get('/cart','Index\IndexController@cart');//购物车
 });
 
 

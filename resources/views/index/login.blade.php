@@ -39,22 +39,23 @@
 							<img src="/static/index/img/wx_cz.jpg" />
 						</div>
 						<div id="profile" class="tab-pane  active">
-							<form class="sui-form">
+							{{session('msg')}}
+							<form class="sui-form" action="{{url('/logindo')}}" method="post">
 								<div class="input-prepend"><span class="add-on loginname"></span>
-									<input id="prependedInput" type="text" placeholder="邮箱/用户名/手机号" class="span2 input-xfat">
+									<input id="prependedInput" name="user_name" type="text" placeholder="邮箱/用户名/手机号" class="span2 input-xfat">
 								</div>
 								<div class="input-prepend"><span class="add-on loginpwd"></span>
-									<input id="prependedInput" type="password" placeholder="请输入密码" class="span2 input-xfat">
+									<input id="prependedInput" name="user_pwd" type="password" placeholder="请输入密码" class="span2 input-xfat">
 								</div>
 								<div class="setting">
 									<label class="checkbox inline">
-          <input name="m1" type="checkbox" value="2" checked=""> 
-          自动登录
-        </label>
+									<input name="m1" type="checkbox" value="2" checked=""> 
+									自动登录
+									</label>
 									<span class="forget">忘记密码？</span>
 								</div>
 								<div class="logined">
-									<a class="sui-btn btn-block btn-xlarge btn-danger" href="home-index.html" >登&nbsp;&nbsp;录</a>
+									<button type="submit" class="sui-btn btn-block btn-xlarge btn-danger"  >登&nbsp;&nbsp;录</button>
 								</div>
 							</form>
 							<div class="otherlogin">

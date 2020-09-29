@@ -10,7 +10,9 @@
     <link rel="stylesheet" type="text/css" href="/static/index/css/webbase.css" />
     <link rel="stylesheet" type="text/css" href="/static/index/css/pages-JD-index.css" />
     <link rel="stylesheet" type="text/css" href="/static/index/css/widget-jquery.autocomplete.css" />
-    <link rel="stylesheet" type="text/css" href="/static/index/css/widget-cartPanelView.css" />
+	<link rel="stylesheet" type="text/css" href="/static/index/css/widget-cartPanelView.css" />
+    <link rel="stylesheet" type="text/css" href="/static/index/css/pages-cart.css" />
+</head>
 </head>
 
 <body>
@@ -64,7 +66,6 @@ $(function(){
 <script type="text/javascript" src="/static/index/js/pages/index.js"></script>
 <script type="text/javascript" src="/static/index/js/widget/cartPanelView.js"></script>
 <script type="text/javascript" src="/static/index/js/widget/jquery.autocomplete.js"></script>
-<script type="text/javascript" src="/static/index/js/widget/nav.js"></script>
 
 </body>
 

@@ -22,7 +22,8 @@
 		<div class="registerArea">
 			<h3>注册新用户<span class="go">我有账号，去<a href="{{url('/login')}}" target="_blank">登陆</a></span></h3>
 			<div class="info">
-				<form class="sui-form form-horizontal">
+			<font color=red>{{session('msg')}}</font>
+				<form class="sui-form form-horizontal" action="{{url('/registerdo')}}" method="post">
 					<div class="control-group">
 						<label class="control-label">用户名：</label>
 						<div class="controls">
@@ -64,7 +65,7 @@
 					<div class="control-group">
 						<label class="control-label"></label>
 						<div class="controls btn-reg">
-							<button class="sui-btn btn-block btn-xlarge btn-danger" href="home.html" target="_blank">完成注册</button>
+							<button id="button" class="sui-btn btn-block btn-xlarge btn-danger" href="home.html" target="_blank">完成注册</button>
 						</div>
 					</div>
 				</form>
@@ -106,6 +107,40 @@
 				alert(res.msg);
 			}
 		},'json')
+	})
+
+	$('#button').click(function(){
+		var user_name = $('input[name="user_name"]').val();
+		if(!user_name){
+			alert("用户名必填");
+			return false;
+		}
+
+		var user_pwd= $('input[name="user_pwd"]').val();
+		var reg=/^[a-zA-Z\d]{6,18}$/;
+		if(!reg.test(user_pwd)){
+			alert("密码为6-18位数字或字母");
+			return false;
+		}
+
+		var repassword = $('input[name="repassword"]').val();
+		if(user_pwd!==repassword){
+			alert("两次密码不一致");
+			return false;
+		}
+
+		var tel_email = $('input[name="tel_email"]').val();
+		if(!tel_email){
+			alert("手机号或邮箱必填");
+			return false;
+		}
+
+		var code = $('input[name="code"]').val();
+		if(!code){
+			alert('验证码必填');
+			return false;
+		}
+		$('form').submit();
 	})
 
 </script>
