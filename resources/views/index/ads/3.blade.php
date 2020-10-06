@@ -1,0 +1,1 @@
+<img src="" width="225" height="118">

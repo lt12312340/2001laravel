@@ -5,25 +5,26 @@
 	<meta charset="utf-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
 	<title>品优购，优质！优质！</title>
-	 <link rel="icon" href="assets//static/index/img/favicon.ico">
-
+	<link rel="icon" href="assets//static/index/img/favicon.ico">
     <link rel="stylesheet" type="text/css" href="/static/index/css/webbase.css" />
     <link rel="stylesheet" type="text/css" href="/static/index/css/pages-JD-index.css" />
     <link rel="stylesheet" type="text/css" href="/static/index/css/widget-jquery.autocomplete.css" />
+	
+	<link rel="stylesheet" type="text/css" href="/static/index/css/pages-cart.css" />
+	<link rel="stylesheet" type="text/css" href="/static/index/css/pages-list.css" />
 	<link rel="stylesheet" type="text/css" href="/static/index/css/widget-cartPanelView.css" />
-    <link rel="stylesheet" type="text/css" href="/static/index/css/pages-cart.css" />
-</head>
+	
 </head>
 
 <body>
 
-@include('index.public.top');
+@include('index.public.top')
 
 
     @yield('content')
     <!-- 内容主体区域 -->
 
-@include('index.public.footer');
+@include('index.public.footer')
 
 <!--购物车单元格 模板-->
 <script type="text/template" id="tbar-cart-item-template">

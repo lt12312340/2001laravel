@@ -127,6 +127,26 @@ Route::prefix('/attribute')->group(function(){
     Route::post('/update/{attr_id}','Admin\AttributeController@update')->name('attribute.update');//执行修改
 });
 
+//广告管理
+Route::prefix('/ad')->group(function(){
+    Route::any('/create','Admin\AdController@create')->name('ad.create');//添加广告
+    Route::any('/store','Admin\AdController@store')->name('ad.store');//执行添加广告
+    Route::post('/upload','Admin\AdController@upload')->name('ad.upload');//图片
+    Route::any('/','Admin\AdController@index')->name('ad');//广告展示
+    Route::get('/position/{position_id}','Admin\AdController@showads')->name('ad.showad');//查看广告
+    Route::get('/position/createhtml/{position_id}','Admin\AdController@createhtml')->name('ad.createhtml');//生成广告
+});
+
+//广告位置管理
+Route::prefix('/position')->group(function(){
+    Route::any('/create','Admin\PositionController@create')->name('position.create');//添加广告位
+    Route::post('/store','Admin\PositionController@store')->name('position.store');//执行添加广告位
+    Route::any('/','Admin\PositionController@index')->name('position');//广告位展示
+    Route::get('/destroy/{position_id?}','Admin\PositionController@destroy')->name('position.destroy');//单删  批删
+    Route::post('/check_name','Admin\PositionController@check_name')->name('position.check_name');//即点即改
+    Route::get('/edit/{position_id}','Admin\PositionController@edit')->name('position.destroy');//修改视图
+    Route::post('/update/{position_id}','Admin\PositionController@update')->name('position.update');//执行修改
+});
 
 });
 
@@ -152,6 +172,8 @@ Route::domain('index.laravel01.com')->group(function(){
     Route::post('/logindo','Index\LoginController@logindo');//登录
     Route::get('/loginout','Index\LoginController@loginout');//退出登录
     Route::get('/cart','Index\IndexController@cart');//购物车
+    Route::get('/goodslist/{cate_id}','Index\IndexController@goodslist');//商品列表
+    Route::get('/goodsinfo/{goods_id}','Index\IndexController@goodsinfo');//商品详情
 });
 
 

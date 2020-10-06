@@ -86,18 +86,18 @@
 						@if($category)
 						@foreach($category as $v)
 						<div class="item bo">
-							<h3><a href="">{{$v['cate_name']}}</a></h3>
+							<h3><a href="{{url('goodslist/'.$v['cate_id'])}}">{{$v['cate_name']}}</a></h3>
 							
 							<div class="item-list clearfix">
 								<div class="subitem">
 							@if($v['child'])
 							@foreach($v['child'] as $vv)
 									<dl class="fore1">
-										<dt><a href="">{{$vv['cate_name']}}</a></dt>
+										<dt><a href="{{url('goodslist/'.$vv['cate_id'])}}">{{$vv['cate_name']}}</a></dt>
 										<dd>
 											@if($vv['child'])
 											@foreach($vv['child'] as $vvv)
-											<em><a href="">{{$vvv['cate_name']}}</a></em>
+											<em><a href="{{url('goodslist/'.$vvv['cate_id'])}}">{{$vvv['cate_name']}}</a></em>
 											@endforeach
 											@endif
 										</dd>
@@ -269,119 +269,22 @@
 			</div>
 			<div class="bd">
 				<ul class="clearfix yui3-g Favourate picLB" id="picLBxxl">
+					@if($goods)
+					@foreach($goods as $v)
 					<li class="yui3-u-1-6">
 						<dl class="picDl huozhe">
 							<dd>
-								<a href="" class="pic"><img src="/static/index/img/like_02.png" alt="" /></a>
+								<a href="{{url('goodsinfo/'.$v->goods_id)}}" class="pic"><img src="{{$v->goods_img}}" alt="" /></a>
 								<div class="like-text">
-									<p>阳光美包新款单肩包女包时尚子母包四件套女</p>
-									<h3>¥116.00</h3>
+									<p>{{$v->goods_name}}</p>
+									<h3>{{$v->goods_price}}</h3>
 								</div>
 							</dd>
-							<dd>
-								<a href="" class="pic"><img src="/static/index/img/like_01.png" alt="" /></a>
-								<div class="like-text">
-									<p>爱仕达 30CM炒锅不粘锅NWG8330E电磁炉炒</p>
-									<h3>¥116.00</h3>
-								</div>
-							</dd>
+							
 						</dl>
 					</li>
-					<li class="yui3-u-1-6">
-						<dl class="picDl jilu">
-							<dd>
-								<a href="" class="pic"><img src="/static/index/img/like_03.png" alt="" /></a>
-								<div class="like-text">
-									<p>爱仕达 30CM炒锅不粘锅NWG8330E电磁炉炒</p>
-									<h3>¥116.00</h3>
-								</div>
-							</dd>
-							<dd>
-								<a href="" class="pic"><img src="/static/index/img/like_02.png" alt="" /></a>
-								<div class="like-text">
-									<p>阳光美包新款单肩包女包时尚子母包四件套女</p>
-									<h3>¥116.00</h3>
-								</div>
-							</dd>
-						</dl>
-					</li>
-					<li class="yui3-u-1-6">
-						<dl class="picDl tuhua">
-							<dd>
-								<a href="" class="pic"><img src="/static/index/img/like_01.png" alt="" /></a>
-								<div class="like-text">
-									<p>捷波朗 </p>
-									<p>（jabra）BOOSI劲步</p>
-									<h3>¥236.00</h3>
-								</div>
-							</dd>
-							<dd>
-								<a href="" class="pic"><img nsrc="assets//static/index/img/like_02.png" alt="" /></a>
-								<div class="like-text">
-									<p>三星（G5500）</p>
-									<p>移动联通双网通</p>
-									<h3>¥566.00</h3>
-								</div>
-							</dd>
-						</dl>
-					</li>
-					<li class="yui3-u-1-6">
-						<dl class="picDl huozhe">
-							<dd>
-								<a href="" class="pic"><img src="/static/index/img/like_02.png" alt="" /></a>
-								<div class="like-text">
-									<p>阳光美包新款单肩包女包时尚子母包四件套女</p>
-									<h3>¥116.00</h3>
-								</div>
-							</dd>
-							<dd>
-								<a href="" class="pic"><img src="/static/index/img/like_01.png" alt="" /></a>
-								<div class="like-text">
-									<p>爱仕达 30CM炒锅不粘锅NWG8330E电磁炉炒</p>
-									<h3>¥116.00</h3>
-								</div>
-							</dd>
-						</dl>
-					</li>
-					<li class="yui3-u-1-6">
-						<dl class="picDl jilu">
-							<dd>
-								<a href="http://sc.chinaz.com/" class="pic"><img src="/static/index/img/like_03.png" alt="" /></a>
-								<div class="like-text">
-									<p>捷波朗 </p>
-									<p>（jabra）BOOSI劲步</p>
-									<h3>¥236.00</h3>
-								</div>
-							</dd>
-							<dd>
-								<a href="http://sc.chinaz.com/" class="pic"><img src="/static/index/img/like_02.png" alt="" /></a>
-								<div class="like-text">
-									<p>欧普</p>
-									<p>JYLZ08面板灯平板灯铝</p>
-									<h3>¥456.00</h3>
-								</div>
-							</dd>
-						</dl>
-					</li>
-					<li class="yui3-u-1-6">
-						<dl class="picDl tuhua">
-							<dd>
-								<a href="http://sc.chinaz.com/" class="pic"><img src="/static/index/img/like_01.png" alt="" /></a>
-								<div class="like-text">
-									<p>三星（G5500）</p>
-									<p>移动联通双网通</p>
-									<h3>¥566.00</h3>
-								</div>
-							</dd>
-							<dd>
-								<a href="http://sc.chinaz.com/" class="pic"><img nsrc="assets//static/index/img/like_02.png" alt="" /></a>
-								<div class="like-text">
-									<p>韩国所望紧致湿润精华露400ml</p>
-									<h3>¥896.00</h3>
-								</div>
-							</dd>
-						</dl>
-					</li>
+					@endforeach
+					@endif
 				</ul>
 			</div>
 		</div>
@@ -395,7 +298,8 @@
 			<div class="clearfix yui3-g Interest">
 				<span class="x-line"></span>
 				<div class="yui3-u row-405 Interest-conver">
-					<img src="/static/index/img/interest01.png" />
+					<!-- <img src="/static/index/img/interest01.png" /> -->
+					@include('index.ads.1')
 				</div>
 				<div class="yui3-u row-225 Interest-conver-split">
 					<h5>好东西</h5>
@@ -417,20 +321,7 @@
 				<div class="yui3-u row-165 brandArea">
 					<span class="brand-yline"></span>
 					<ul class="yui3-g brand-list">
-						<li class="yui3-u-1-2 brand-pit"><img src="/static/index/img/brand01.png" /></li>
-						<li class="yui3-u-1-2 brand-pit"><img src="/static/index/img/brand02.png" /></li>
-						<li class="yui3-u-1-2 brand-pit"><img src="/static/index/img/brand03.png" /></li>
-						<li class="yui3-u-1-2 brand-pit"><img src="/static/index/img/brand04.png" /></li>
-						<li class="yui3-u-1-2 brand-pit"><img src="/static/index/img/brand05.png" /></li>
-						<li class="yui3-u-1-2 brand-pit"><img src="/static/index/img/brand06.png" /></li>
-						<li class="yui3-u-1-2 brand-pit"><img src="/static/index/img/brand07.png" /></li>
-						<li class="yui3-u-1-2 brand-pit"><img src="/static/index/img/brand08.png" /></li>
-						<li class="yui3-u-1-2 brand-pit"><img src="/static/index/img/brand09.png" /></li>
-						<li class="yui3-u-1-2 brand-pit"><img src="/static/index/img/brand10.png" /></li>
-						<li class="yui3-u-1-2 brand-pit"><img src="/static/index/img/brand11.png" /></li>
-						<li class="yui3-u-1-2 brand-pit"><img src="/static/index/img/brand12.png" /></li>
-						<li class="yui3-u-1-2 brand-pit"><img src="/static/index/img/brand13.png" /></li>
-						<li class="yui3-u-1-2 brand-pit"><img src="/static/index/img/brand03.png" /></li>
+						@include('index.ads.7')
 					</ul>
 				</div>
 			</div>

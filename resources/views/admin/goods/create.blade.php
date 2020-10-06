@@ -109,6 +109,14 @@
                 </div>
               </div>
 
+              <div class="layui-form-item" pane="">
+                <label class="layui-form-label">是否首页推荐:</label>
+                <div class="layui-input-block">
+                  <input type="radio" name="is_index_slice" value="1" title="是" checked="">
+                  <input type="radio" name="is_index_slice" value="2" title="否">
+                </div>
+              </div>
+
               <div class="layui-form-item">
                   <label class="layui-form-label">商品品牌</label>
                   <div class="layui-input-block">

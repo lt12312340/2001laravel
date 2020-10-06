@@ -14,4 +14,9 @@ class Goods extends Model
     public $timestamps = false;
     //黑名单
     protected $guarded=[];
+
+    public static function is_index_slice(){
+        $index_slice = self::select('goods_img')->where('is_index_slice',1)->where('is_up',1)->take(3)->get();
+        return $index_slice;
+    }
 }
