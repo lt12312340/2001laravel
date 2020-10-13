@@ -171,9 +171,20 @@ Route::domain('index.laravel01.com')->group(function(){
     Route::post('/registerdo','Index\LoginController@registerdo');//注册
     Route::post('/logindo','Index\LoginController@logindo');//登录
     Route::get('/loginout','Index\LoginController@loginout');//退出登录
-    Route::get('/cart','Index\IndexController@cart');//购物车
-    Route::get('/goodslist/{cate_id}','Index\IndexController@goodslist');//商品列表
+    
+    Route::get('/goodslist/{cate_id}','Index\CatController@goodslist');//商品列表
     Route::get('/goodsinfo/{goods_id}','Index\IndexController@goodsinfo');//商品详情
+    Route::get('/getattrprice','Index\IndexController@getattrprice');//获取商品sku价格
+    Route::get('/addcart','Index\CartController@addcart');//添加商品购物车
+
+    Route::middleware('checkuserlogin')->group(function(){
+        Route::get('/cart','Index\CartController@cart');//购物车展示
+        Route::get('/getcartprice','Index\CartController@getcartprice');//获取总价
+        Route::get('/confirmorder','Index\OrderController@confirmorder');//点击结算 跳转收货地址
+        Route::get('/getsonaddress','Index\OrderController@getsonaddress');//获取子地区
+        Route::post('/useraddressadd','Index\OrderController@useraddressadd');//用户收货地址添加
+        Route::post('/order','Index\OrderController@order');//用户收货地址添加
+    });
 });
 
 

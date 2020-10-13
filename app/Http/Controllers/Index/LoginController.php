@@ -86,8 +86,13 @@ class LoginController extends Controller
         if(!Hash::check($post['user_pwd'], $user->user_pwd)){
             return redirect('/login')->with('msg','密码或用户名有误');
         }
-
+        //dd($request['refer']);
         $request->session()->put('user',$user);
+        
+        if($request['refer']){
+            // dd(123);
+            return redirect ($request['refer']);
+        }
         if($user){
             return redirect('/');
         }

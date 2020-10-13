@@ -66,48 +66,7 @@ class IndexController extends Controller
         
     }
 
-    //商品列表
-    public function goodslist($id){
-        // dd($cate_id);
-        $catename = Category::select('cate_name')->find($id)->toArray()??[];
-        // dd($catename);
-        $cate = Category::get();
-        $cate_id = $this->cateid($cate,$id); //获取该分类下的分类id
-        // dump($cate_id);
-        $cate_id = array_unique($cate_id);
-        $brand_id = Goods::select('brand_id')->whereIn('cate_id',$cate_id)->orderBy('goods_id','desc')->get()->toArray()??[];
-        // dump($brand_id);
-        $brand_id = array_values($brand_id);
-        // dd($brand_id);
-        $count = count($brand_id);
-        // dd($count);
-        if($count != 0){
-            for($i=0; $i<$count; $i++){
-                $brandid[] = $brand_id[$i]['brand_id'];
-            }
-            $brandid = array_unique($brandid);
-        }else{
-            $brandid = [];
-        }
-        // dump($brandid);
-        $brand_logo = Brand::select('brand_id','brand_logo')->whereIn('brand_id',$brandid)->get();
-        // dd($brand_logo);
-        
-        return view('index.list',['brand_logo'=>$brand_logo,'catename'=>$catename['cate_name']]);
-    }
-
-    //当前分类下所有分类id
-    public function cateid($data,$pid=0){
-        static $newArray=[];
-        $newArray[] = $pid;
-        foreach($data as $k => $v){
-            if($v['pid']==$pid){
-                $newarray[] = $v->cate_id;
-                $this->cateid($data,$v['cate_id']);
-            }
-        }
-        return $newArray;
-    }
+    
 
 
     //商品详情
@@ -139,7 +98,7 @@ class IndexController extends Controller
             }
         }
         // dd($new_goods_specs);
-        return view('index/goodsshow',['goods'=>$goods,'gallery'=>$gallery,'goods_attr_base'=>$goods_attr_base,'goods_attr_specs'=>$new_goods_specs]);
+        return view('index/indexgoodsshow',['goods'=>$goods,'gallery'=>$gallery,'goods_attr_base'=>$goods_attr_base,'goods_attr_specs'=>$new_goods_specs]);
 
     }
 
@@ -155,8 +114,5 @@ class IndexController extends Controller
         return $this->success('ok',['goods_price'=>$goods_price]);
     }
 
-    //购物车
-    public function cart(){
-        return view('index.cart');
-    }
+    
 }

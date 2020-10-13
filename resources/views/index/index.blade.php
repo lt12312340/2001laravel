@@ -303,8 +303,8 @@
 				</div>
 				<div class="yui3-u row-225 Interest-conver-split">
 					<h5>好东西</h5>
-					<img src="/static/index/img/interest02.png" />
-					<img src="/static/index/img/interest03.png" />
+					@include('index.ads.2')
+					@include('index.ads.3')
 				</div>
 				<div class="yui3-u row-405 Interest-conver-split blockgary">
 					<h5>品牌街</h5>

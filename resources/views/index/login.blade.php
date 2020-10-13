@@ -41,6 +41,7 @@
 						<div id="profile" class="tab-pane  active">
 							{{session('msg')}}
 							<form class="sui-form" action="{{url('/logindo')}}" method="post">
+							<input type="hidden" name="refer" value="{{request()->refer??''}}">
 								<div class="input-prepend"><span class="add-on loginname"></span>
 									<input id="prependedInput" name="user_name" type="text" placeholder="邮箱/用户名/手机号" class="span2 input-xfat">
 								</div>

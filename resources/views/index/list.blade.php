@@ -104,8 +104,8 @@
 					<li class="active">{{$catename}}</li>					
 				</ul>
 				<ul class="tags-choose">
-					<li class="tag">全网通<i class="sui-icon icon-tb-close"></i></li>
-					<li class="tag">63G<i class="sui-icon icon-tb-close"></i></li>
+					<li class="tag tag-brand_id"><i class="sui-icon icon-tb-close"></i></li>
+					<li class="tag tag-price"><i class="sui-icon icon-tb-close"></i></li>
 				</ul>
 				<form class="fl sui-form form-dark">
 					<div class="input-control control-right">
@@ -127,10 +127,14 @@
 					<div class="fl key brand">品牌</div>
 					<div class="value logos">
 					
-						<ul class="logo-list">
+						<ul class="logo-list search">
 							
 						@foreach($brand_logo as $v)
-							<li><img src="{{$v->brand_logo??''}}" /></li>
+							<li field="brand_id" value="{{$v->brand_id}}" title="{{$v->brand_name}}">
+								<a href="javascript:;" @if(isset($query['brand_id']) && $query['brand_id'] == $v->brand_id) class="redhover" @endif>
+									<img src="{{$v->brand_logo??''}}" width="102" height="52"/>
+								</a>
+							</li>
 						@endforeach
 						</ul>
 					</div>
@@ -142,132 +146,24 @@
 					</div>
 				</div>
 
-				<div class="type-wrap">
-					<div class="fl key">网络制式</div>
-					<div class="fl value">
-						<ul class="type-list">
-							<li>
-								<a>GSM（移动/联通2G）</a>
-							</li>
-							<li>
-								<a>电信2G</a>
-							</li>
-							<li>
-								<a>电信3G</a>
-							</li>
-							<li>
-								<a>移动3G</a>
-							</li>
-							<li>
-								<a>联通3G</a>
-							</li>
-							<li>
-								<a>联通4G</a>
-							</li>
-							<li>
-								<a>电信3G</a>
-							</li>
-							<li>
-								<a>移动3G</a>
-							</li>
-							<li>
-								<a>联通3G</a>
-							</li>
-							<li>
-								<a>联通4G</a>
-							</li>
-						</ul>
-					</div>
-					<div class="fl ext"></div>
-				</div>
-				<div class="type-wrap">
-					<div class="fl key">显示屏尺寸</div>
-					<div class="fl value">
-						<ul class="type-list">
-							<li>
-								<a>4.0-4.9英寸</a>
-							</li>
-							<li>
-								<a>4.0-4.9英寸</a>
-							</li>
-						</ul>
-					</div>
-					<div class="fl ext"></div>
-				</div>
-				<div class="type-wrap">
-					<div class="fl key">摄像头像素</div>
-					<div class="fl value">
-						<ul class="type-list">
-							<li>
-								<a>1200万以上</a>
-							</li>
-							<li>
-								<a>800-1199万</a>
-							</li>
-							<li>
-								<a>1200-1599万</a>
-							</li>
-							<li>
-								<a>1600万以上</a>
-							</li>
-							<li>
-								<a>无摄像头</a>
-							</li>
-						</ul>
-					</div>
-					<div class="fl ext"></div>
-				</div>
+				
 				<div class="type-wrap">
 					<div class="fl key">价格</div>
 					<div class="fl value">
-						<ul class="type-list">
-							<li>
-								<a>0-500元</a>
+						<ul class="type-list search">
+							@if($price)
+							@foreach($price as $v)
+							<li field="price" value="{{$v}}">
+								<a @if(isset($query['price']) && $query['price'] == $v) class="redhover" @endif>{{$v}}</a>
 							</li>
-							<li>
-								<a>500-1000元</a>
-							</li>
-							<li>
-								<a>1000-1500元</a>
-							</li>
-							<li>
-								<a>1500-2000元</a>
-							</li>
-							<li>
-								<a>2000-3000元 </a>
-							</li>
-							<li>
-								<a>3000元以上</a>
-							</li>
+							@endforeach
+							@endif
 						</ul>
 					</div>
 					<div class="fl ext">
 					</div>
 				</div>
-				<div class="type-wrap">
-					<div class="fl key">更多筛选项</div>
-					<div class="fl value">
-						<ul class="type-list">
-							<li>
-								<a>特点</a>
-							</li>
-							<li>
-								<a>系统</a>
-							</li>
-							<li>
-								<a>手机内存 </a>
-							</li>
-							<li>
-								<a>单卡双卡</a>
-							</li>
-							<li>
-								<a>其他</a>
-							</li>
-						</ul>
-					</div>
-					<div class="fl ext">
-					</div>
-				</div>
+				
 			</div>
 			<!--details-->
 			<div class="details">
@@ -294,19 +190,21 @@
 				</div>
 				<div class="goods-list">
 					<ul class="yui3-g">
+					@if($goods)
+					@foreach($goods as $v)
 						<li class="yui3-u-1-5">
 							<div class="list-wrap">
 								<div class="p-img">
-									<a href="item.html" target="_blank"><img src="/static/index/img/_/mobile01.png" /></a>
+									<a href="{{url('goodsinfo/'.$v->goods_id)}}" target="_blank"><img src="{{$v->goods_img}}" /></a>
 								</div>
 								<div class="price">
 									<strong>
 											<em>¥</em>
-											<i>6088.00</i>
+											<i>{{$v->goods_price}}</i>
 										</strong>
 								</div>
 								<div class="attr">
-									<em>Apple苹果iPhone 6s (A1699)</em>
+									<em>{{$v->goods_name}}</em>
 								</div>
 								<div class="cu">
 									<em><span>促</span>满一件可参加超值换购</em>
@@ -321,284 +219,13 @@
 								</div>
 							</div>
 						</li>
-						<li class="yui3-u-1-5">
-							<div class="list-wrap">
-								<div class="p-img">
-									<img src="/static/index/img/_/mobile02.png" />
-								</div>
-								<div class="price">
-									<strong>
-											<em>¥</em>
-											<i>6088.00</i>
-										</strong>
-								</div>
-								<div class="attr">
-									<em>Apple苹果iPhone 6s (A1699)</em>
-								</div>
-								<div class="cu">
-									<em><span>促</span>满一件可参加超值换购</em>
-								</div>
-								<div class="commit">
-									<i class="command">已有2000人评价</i>
-								</div>
-								<div class="operate">
-									<a href="javascript:void(0);" class="sui-btn btn-bordered btn-danger">加入购物车</a>
-									<a href="javascript:void(0);" class="sui-btn btn-bordered">对比</a>
-									<a href="javascript:void(0);" class="sui-btn btn-bordered">关注</a>
-								</div>
-							</div>
-						</li>
-						<li class="yui3-u-1-5">
-							<div class="list-wrap">
-								<div class="p-img">
-									<img src="/static/index/img/_/mobile03.png" />
-								</div>
-								<div class="price">
-									<strong>
-											<em>¥</em>
-											<i>6088.00</i>
-										</strong>
-								</div>
-								<div class="attr">
-									<em>Apple苹果iPhone 6s (A1699)</em>
-								</div>
-								<div class="cu">
-									<em><span>促</span>满一件可参加超值换购</em>
-								</div>
-								<div class="commit">
-									<i class="command">已有2000人评价</i>
-								</div>
-								<div class="operate">
-									<a href="javascript:void(0);" class="sui-btn btn-bordered btn-danger">加入购物车</a>
-									<a href="javascript:void(0);" class="sui-btn btn-bordered">对比</a>
-									<a href="javascript:void(0);" class="sui-btn btn-bordered">关注</a>
-								</div>
-							</div>
-						</li>
-						<li class="yui3-u-1-5">
-							<div class="list-wrap">
-								<div class="p-img">
-									<img src="/static/index/img/_/mobile04.png" />
-								</div>
-								<div class="price">
-									<strong>
-											<em>¥</em>
-											<i>6088.00</i>
-										</strong>
-								</div>
-								<div class="attr">
-									<em>Apple苹果iPhone 6s (A1699)</em>
-								</div>
-								<div class="cu">
-									<em><span>促</span>满一件可参加超值换购</em>
-								</div>
-								<div class="commit">
-									<i class="command">已有2000人评价</i>
-								</div>
-								<div class="operate">
-									<a href="javascript:void(0);" class="sui-btn btn-bordered btn-danger">加入购物车</a>
-									<a href="javascript:void(0);" class="sui-btn btn-bordered">对比</a>
-									<a href="javascript:void(0);" class="sui-btn btn-bordered">关注</a>
-								</div>
-							</div>
-						</li>
-						<li class="yui3-u-1-5">
-							<div class="list-wrap">
-								<div class="p-img">
-									<img src="/static/index/img/_/mobile05.png" />
-								</div>
-								<div class="price">
-									<strong>
-											<em>¥</em>
-											<i>6088.00</i>
-										</strong>
-								</div>
-								<div class="attr">
-									<em>Apple苹果iPhone 6s (A1699)</em>
-								</div>
-								<div class="cu">
-									<em><span>促</span>满一件可参加超值换购</em>
-								</div>
-								<div class="commit">
-									<i class="command">已有2000人评价</i>
-								</div>
-								<div class="operate">
-									<a href="javascript:void(0);" class="sui-btn btn-bordered btn-danger">加入购物车</a>
-									<a href="javascript:void(0);" class="sui-btn btn-bordered">对比</a>
-									<a href="javascript:void(0);" class="sui-btn btn-bordered">关注</a>
-								</div>
-							</div>
-						</li>
-						<li class="yui3-u-1-5">
-							<div class="list-wrap">
-								<div class="p-img">
-									<img src="/static/index/img/_/mobile06.png" />
-								</div>
-								<div class="price">
-									<strong>
-											<em>¥</em>
-											<i>6088.00</i>
-										</strong>
-								</div>
-								<div class="attr">
-									<em>Apple苹果iPhone 6s (A1699)</em>
-								</div>
-								<div class="cu">
-									<em><span>促</span>满一件可参加超值换购</em>
-								</div>
-								<div class="commit">
-									<i class="command">已有2000人评价</i>
-								</div>
-								<div class="operate">
-									<a href="javascript:void(0);" class="sui-btn btn-bordered btn-danger">加入购物车</a>
-									<a href="javascript:void(0);" class="sui-btn btn-bordered">对比</a>
-									<a href="javascript:void(0);" class="sui-btn btn-bordered">关注</a>
-								</div>
-							</div>
-						</li>
-						<li class="yui3-u-1-5">
-							<div class="list-wrap">
-								<div class="p-img">
-									<img src="/static/index/img/_/mobile01.png" />
-								</div>
-								<div class="price">
-									<strong>
-											<em>¥</em>
-											<i>6088.00</i>
-										</strong>
-								</div>
-								<div class="attr">
-									<em>Apple苹果iPhone 6s (A1699)</em>
-								</div>
-								<div class="cu">
-									<em><span>促</span>满一件可参加超值换购</em>
-								</div>
-								<div class="commit">
-									<i class="command">已有2000人评价</i>
-								</div>
-								<div class="operate">
-									<a href="javascript:void(0);" class="sui-btn btn-bordered btn-danger">加入购物车</a>
-									<a href="javascript:void(0);" class="sui-btn btn-bordered">对比</a>
-									<a href="javascript:void(0);" class="sui-btn btn-bordered">关注</a>
-								</div>
-							</div>
-						</li>
-						<li class="yui3-u-1-5">
-							<div class="list-wrap">
-								<div class="p-img">
-									<img src="/static/index/img/_/mobile02.png" />
-								</div>
-								<div class="price">
-									<strong>
-											<em>¥</em>
-											<i>6088.00</i>
-										</strong>
-								</div>
-								<div class="attr">
-									<em>Apple苹果iPhone 6s (A1699)</em>
-								</div>
-								<div class="cu">
-									<em><span>促</span>满一件可参加超值换购</em>
-								</div>
-								<div class="commit">
-									<i class="command">已有2000人评价</i>
-								</div>
-								<div class="operate">
-									<a href="javascript:void(0);" class="sui-btn btn-bordered btn-danger">加入购物车</a>
-									<a href="javascript:void(0);" class="sui-btn btn-bordered">对比</a>
-									<a href="javascript:void(0);" class="sui-btn btn-bordered">关注</a>
-								</div>
-							</div>
-						</li>
-						<li class="yui3-u-1-5">
-							<div class="list-wrap">
-								<div class="p-img">
-									<img src="/static/index/img/_/mobile03.png" />
-								</div>
-								<div class="price">
-									<strong>
-											<em>¥</em>
-											<i>6088.00</i>
-										</strong>
-								</div>
-								<div class="attr">
-									<em>Apple苹果iPhone 6s (A1699)</em>
-								</div>
-								<div class="cu">
-									<em><span>促</span>满一件可参加超值换购</em>
-								</div>
-								<div class="commit">
-									<i class="command">已有2000人评价</i>
-								</div>
-								<div class="operate">
-									<a href="javascript:void(0);" class="sui-btn btn-bordered btn-danger">加入购物车</a>
-									<a href="javascript:void(0);" class="sui-btn btn-bordered">对比</a>
-									<a href="javascript:void(0);" class="sui-btn btn-bordered">关注</a>
-								</div>
-							</div>
-						</li>
-						<li class="yui3-u-1-5">
-							<div class="list-wrap">
-								<div class="p-img">
-									<img src="/static/index/img/_/mobile04.png" />
-								</div>
-								<div class="price">
-									<strong>
-											<em>¥</em>
-											<i>6088.00</i>
-										</strong>
-								</div>
-								<div class="attr">
-									<em>Apple苹果iPhone 6s (A1699)</em>
-								</div>
-								<div class="cu">
-									<em><span>促</span>满一件可参加超值换购</em>
-								</div>
-								<div class="commit">
-									<i class="command">已有2000人评价</i>
-								</div>
-								<div class="operate">
-									<a href="javascript:void(0);" class="sui-btn btn-bordered btn-danger">加入购物车</a>
-									<a href="javascript:void(0);" class="sui-btn btn-bordered">对比</a>
-									<a href="javascript:void(0);" class="sui-btn btn-bordered">关注</a>
-								</div>
-							</div>
-						</li>
+					@endforeach
+					@endif
 					</ul>
 				</div>
 				<div class="fr page">
-					<div class="sui-pagination pagination-large">
-						<ul>
-							<li class="prev disabled">
-								<a href="#">«上一页</a>
-							</li>
-							<li class="active">
-								<a href="#">1</a>
-							</li>
-							<li>
-								<a href="#">2</a>
-							</li>
-							<li>
-								<a href="#">3</a>
-							</li>
-							<li>
-								<a href="#">4</a>
-							</li>
-							<li>
-								<a href="#">5</a>
-							</li>
-							<li class="dotted"><span>...</span></li>
-							<li class="next">
-								<a href="#">下一页»</a>
-							</li>
-						</ul>
-						<div><span>共10页&nbsp;</span><span>
-      到第
-      <input type="text" class="page-num">
-      页 <button class="page-confirm" onclick="alert(1)">确定</button></span></div>
-					</div>
+				{{$goods->appends(['query'=>$query])->links('vendor.pagination.indexshop')}}
 				</div>
-			</div>
 			<!--hotsale-->
 			<div class="clearfix hot-sale">
 				<h4 class="title">热卖商品</h4>
@@ -830,6 +457,44 @@
 	</script>
 	<!--侧栏面板结束-->
 		<script type="text/javascript" src="/static/index/js/plugins/jquery/jquery.min.js"></script>
+
+		<script>
+			$(document).on('click','.sui-icon',function(){
+			    $(this).parent().hide();
+			})
+
+			$(function(){
+				$('.redhover').each(function(i,k){
+					var s_key = $(this).parent().attr('field');
+					var s_val = $(this).parent().attr('value');
+					
+					if(s_key=='brand_id'){
+						var s_val = $(this).parent().attr('title');
+					}
+					$('.tag-'+s_key).html(s_val+'<i class="sui-icon icon-tb-close"></i>').show();
+				});
+			});	
+
+			$('.search li').click(function(){
+				// alert(123);
+				$(this).siblings().find('a').removeClass('redhover');
+				$(this).find('a').addClass('redhover');
+				var search = '';
+				$('.redhover').each(function(i,k){
+					var s_key = $(this).parent().attr('field');
+					var s_val = $(this).parent().attr('value');
+					search += s_key+'='+s_val+'&';
+				})
+				var url = "{{$url}}";
+				if(search){
+					url +='?'+search.substring(0,search.length-1);
+					location.href=url;
+				}
+				
+			})
+			
+		</script>
+
 		<script type="text/javascript">
 			$(function() {
 				$("#service").hover(function() {

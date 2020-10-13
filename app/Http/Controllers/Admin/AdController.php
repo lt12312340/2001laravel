@@ -89,7 +89,7 @@ class AdController extends Controller
         $position = Position::find($position_id);
         // dd($position);
         if($position->template==1){
-            $ad = Ad::where('position_id',$position_id)->value('ad_img');
+            $ad = Ad::where('position_id',$position_id)->orderBy('ad_id','desc')->value('ad_img');
             // dd($ad);
             $template = 'onepic';
         }elseif($position->template==2){
